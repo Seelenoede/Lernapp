@@ -22,6 +22,7 @@ import java.util.zip.InflaterOutputStream;
 
 public class MainActivity extends Activity {
     //jetzt kommen die Variablen
+    //jetzt kommt alex
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
