@@ -23,6 +23,7 @@ import java.util.zip.InflaterOutputStream;
 public class MainActivity extends Activity {
     //jetzt kommen die Variablen
     //jetzt kommt alex
+    Activity activity;
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        activity = this;
         setContentView(R.layout.activity_main);
         mTitle = mDrawerTitle = getTitle();
 
@@ -42,12 +44,13 @@ public class MainActivity extends Activity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
+        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[5];
 
         drawerItem[0] = new ObjectDrawerItem(R.drawable.ic_home, "Home");
         drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_auto, "Automodus");
         drawerItem[2] = new ObjectDrawerItem(R.drawable.ic_chart, "Auswertungen");
-        drawerItem[3] = new ObjectDrawerItem(R.drawable.ic_einstellungen, "Einstellungen");
+        drawerItem[3] = new ObjectDrawerItem(R.drawable.ic_light, "Lerntipps");
+        drawerItem[4] = new ObjectDrawerItem(R.drawable.ic_einstellungen, "Einstellungen");
 
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.listview_item_row, drawerItem);
         mDrawerList.setAdapter(adapter);
@@ -153,6 +156,9 @@ public class MainActivity extends Activity {
                 fragment = new AuswertungenFragment();
                 break;
             case 3:
+                fragment = new LerntippFragment();
+                break;
+            case 4:
                 fragment = new EinstellungenFragment();
                 break;
 
@@ -187,7 +193,8 @@ public class MainActivity extends Activity {
     private void setCurrentColor(){
         mDrawerList.setBackgroundColor(currentColor);
         getActionBar().setBackgroundDrawable(new ColorDrawable(currentColor));
-        getCurrentFocus().setBackgroundColor(currentColor);
+        //getCurrentFocus().setBackgroundColor(currentColor);
+        activity.findViewById(android.R.id.content).setBackgroundColor(currentColor);
 
         if(fragment!=null)
         {
