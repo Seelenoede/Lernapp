@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.File;
+
 /**
  * Created by Student on 14.04.2015.
  */
 public class HomeFragment extends Fragment {
 
+    File[] allFiles;
     public HomeFragment() {
     }
 
@@ -19,6 +22,12 @@ public class HomeFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         rootView.setBackgroundColor(((MainActivity)getActivity()).currentColor);
+        allFiles = FileHandler.getAllFiles();
+
+        for (File file : allFiles)
+        {
+
+        }
 
         return rootView;
     }
