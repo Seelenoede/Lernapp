@@ -32,6 +32,7 @@ public class FileHandler
         else
         {
             allFiles = storage.listFiles();
+            Log.v(TAG, "read all Files");
         }
         return allFiles;
     }

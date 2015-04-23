@@ -22,6 +22,7 @@ public class HomeFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         rootView.setBackgroundColor(((MainActivity)getActivity()).currentColor);
+
         allFiles = FileHandler.getAllFiles();
 
         for (File file : allFiles)
