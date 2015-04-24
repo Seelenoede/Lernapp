@@ -4,5 +4,4 @@ Known Bugs:
 
 
 License Info:
-PDF icon is licensed under CC BY-NC-ND 4.0 by iynque (http://www.iconarchive.com/show/flat-ios7-style-documents-icons-by-iynque/pdf-icon.html)
 Audio icon is licensed under CC BY 3.0 by Designmodo (https://www.iconfinder.com/icons/103167/audio_music_sound_speaker_volume_icon)
