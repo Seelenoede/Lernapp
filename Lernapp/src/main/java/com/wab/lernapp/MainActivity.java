@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
     public static int currentColor;
     private Fragment fragment;
     private View view;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -192,7 +193,6 @@ public class MainActivity extends Activity {
     private void setCurrentColor(){
         mDrawerList.setBackgroundColor(currentColor);
         getActionBar().setBackgroundDrawable(new ColorDrawable(currentColor));
-        //getCurrentFocus().setBackgroundColor(currentColor);
         activity.findViewById(android.R.id.content).setBackgroundColor(currentColor);
 
         if(fragment!=null)
