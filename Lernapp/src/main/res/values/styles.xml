@@ -13,4 +13,25 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+        <style name="PurpleTheme" parent="android:Theme.Material.Light">
+            <!-- Main theme colors -->
+            <!--   your app branding color for the app bar -->
+            <item name="android:colorPrimary">@color/purple</item>
+            <!--   darker variant for the status bar and contextual app bars -->
+            <!--   theme UI controls like checkboxes and text fields -->
+            <item name="android:colorAccent">@color/lightgelb</item>
+            <!--item name="android:windowBackground">@color/darkgreen</item-->
+        </style>
+
+    <style name="GreenTheme" parent="android:Theme.Material">
+        <!-- Main theme colors -->
+        <!--   your app branding color for the app bar -->
+        <item name="android:colorPrimary">@color/darkgreen</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+        <!--item name="android:colorPrimaryDark">@color/orange</item-->
+        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="android:colorAccent">@color/pink</item>
+
+    </style>
+
 </resources>

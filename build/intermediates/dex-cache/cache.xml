@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Alexander\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jar="D:\programme\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="C:\Users\Alexander\AndroidStudioProjects\Lernapp\Lernapp\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-2210c78ea42afdc4c4a75c818a837dadee087800.jar" />
+        <dex dex="D:\Dokumente\hftl\6.Semester\WAB3\Git\Lernapp\Lernapp\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-b6bda836591234df1a97dd73ee8d9fe1d59a2d15.jar" />
     </item>
     <item
-        jar="C:\Users\Alexander\AndroidStudioProjects\Lernapp\Lernapp\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jar="D:\Dokumente\hftl\6.Semester\WAB3\Git\Lernapp\Lernapp\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="C:\Users\Alexander\AndroidStudioProjects\Lernapp\Lernapp\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-1ca8603b16ee6372b551412c9e41349b5b379397.jar" />
+        <dex dex="D:\Dokumente\hftl\6.Semester\WAB3\Git\Lernapp\Lernapp\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-ffe20d34c92846d8dd2d7a12e4e38ab37df4abb4.jar" />
     </item>
     <item
-        jar="C:\Users\Alexander\AndroidStudioProjects\Lernapp\Lernapp\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="C:\Users\Alexander\AndroidStudioProjects\Lernapp\Lernapp\build\intermediates\pre-dexed\debug\classes-358098497295b82dd096ba369b59e750791d4a4c.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alexander\AndroidStudioProjects\Lernapp\Lernapp\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
+        jar="D:\Dokumente\hftl\6.Semester\WAB3\Git\Lernapp\Lernapp\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="C:\Users\Alexander\AndroidStudioProjects\Lernapp\Lernapp\build\intermediates\pre-dexed\debug\classes-78a5fce2fbc5cbdfe25e26df5623770d05f12806.jar" />
+        <dex dex="D:\Dokumente\hftl\6.Semester\WAB3\Git\Lernapp\Lernapp\build\intermediates\pre-dexed\debug\classes-a3754662b098e74c7cd99a760a1d4b0073382f7e.jar" />
+    </item>
+    <item
+        jar="D:\Dokumente\hftl\6.Semester\WAB3\Git\Lernapp\Lernapp\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="D:\Dokumente\hftl\6.Semester\WAB3\Git\Lernapp\Lernapp\build\intermediates\pre-dexed\debug\classes-6cba448a969833eef90f2f345282d0340315b89a.jar" />
     </item>
 
 </items>

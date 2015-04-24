@@ -9,13 +9,14 @@
     <string name="action_filter">Filter</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="preference_file_key">color_preference</string>
+    <string name="saved_color">saved_color</string>
 
     <string-array name="navigation_drawer_items_array">
         <item>Home</item>
         <item>Automodus</item>
         <item>Auswertungen</item>
         <item>Lerntipps</item>
-        <item>Einstellungen</item>
     </string-array>
     <string-array name="spinner_colors_item_array">
         <item>Grün</item>

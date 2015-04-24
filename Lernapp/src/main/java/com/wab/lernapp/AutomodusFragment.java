@@ -18,7 +18,6 @@ public class AutomodusFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_automodus, container, false);
-        rootView.setBackgroundColor(((MainActivity)getActivity()).currentColor);
         return rootView;
     }
 }
