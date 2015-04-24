@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -20,8 +19,8 @@ import android.widget.Toast;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterOutputStream;
 
-public class MainActivity extends Activity {
-    
+public class MainActivity extends Activity  implements View.OnClickListener {
+
     Activity activity;
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
@@ -29,13 +28,13 @@ public class MainActivity extends Activity {
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    public static int currentColor;
+   // public static int currentColor;
     private Fragment fragment;
-    private View view;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        themeUtils.onActivityCreateSetTheme(this);
         activity = this;
         setContentView(R.layout.activity_main);
         mTitle = mDrawerTitle = getTitle();
@@ -44,13 +43,13 @@ public class MainActivity extends Activity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[5];
+        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
 
         drawerItem[0] = new ObjectDrawerItem(R.drawable.ic_home, "Home");
         drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_auto, "Automodus");
         drawerItem[2] = new ObjectDrawerItem(R.drawable.ic_chart, "Auswertungen");
         drawerItem[3] = new ObjectDrawerItem(R.drawable.ic_light, "Lerntipps");
-        drawerItem[4] = new ObjectDrawerItem(R.drawable.ic_einstellungen, "Einstellungen");
+
 
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.listview_item_row, drawerItem);
         mDrawerList.setAdapter(adapter);
@@ -81,6 +80,10 @@ public class MainActivity extends Activity {
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+
+        findViewById(R.id.greenbutton).setOnClickListener(this);
+
+        findViewById(R.id.purplebutton).setOnClickListener(this);
 	}
 
 	@Override
@@ -113,17 +116,15 @@ public class MainActivity extends Activity {
                  text = "Suche wird nicht unterstützt!";
                  duration = Toast.LENGTH_SHORT;
 
-                 toast = Toast.makeText(context, text, duration);
-                 toast.show();
-                 currentColor = getResources().getColor(R.color.lightgreen);
-                 setCurrentColor();
+                 //currentColor = getResources().getColor(R.color.lightgreen);
+                // setCurrentColor();
                  return true;
              case R.id.action_filter:
                  context = getApplicationContext();
                  text = "Filtern kommt noch!";
                  duration = Toast.LENGTH_SHORT;
-                 currentColor = getResources().getColor(R.color.lightpink);
-                 setCurrentColor();
+                 //currentColor = getResources().getColor(R.color.lightpink);
+                 //setCurrentColor();
                  toast = Toast.makeText(context, text, duration);
                  toast.show();
                  return true;
@@ -131,6 +132,23 @@ public class MainActivity extends Activity {
                  return super.onOptionsItemSelected(item);
          }
 	}
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.greenbutton:
+
+                themeUtils.changeToTheme(this, themeUtils.GREEN);
+
+                break;
+
+            case R.id.purplebutton:
+
+                themeUtils.changeToTheme(this, themeUtils.PURPLE);
+
+                break;
+    }
+    }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
@@ -157,9 +175,6 @@ public class MainActivity extends Activity {
                 break;
             case 3:
                 fragment = new LerntippFragment();
-                break;
-            case 4:
-                fragment = new EinstellungenFragment();
                 break;
 
             default:
@@ -190,14 +205,13 @@ public class MainActivity extends Activity {
         mDrawerToggle.syncState();
     }
 
-    private void setCurrentColor(){
+  /*  private void setCurrentColor(){
         mDrawerList.setBackgroundColor(currentColor);
         getActionBar().setBackgroundDrawable(new ColorDrawable(currentColor));
         activity.findViewById(android.R.id.content).setBackgroundColor(currentColor);
-
         if(fragment!=null)
         {
             fragment.getView().setBackgroundColor(currentColor);
         }
-    }
+    }*/
 }
