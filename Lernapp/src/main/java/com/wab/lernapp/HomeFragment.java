@@ -1,7 +1,7 @@
 package com.wab.lernapp;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -17,8 +18,10 @@ import java.io.File;
  */
 public class HomeFragment extends Fragment {
 
-    File[] allFiles;
+    private static final String TAG = "HomeFragment";
+
     private ListView mItemList;
+    FileHandler fileHandler;
 
     public HomeFragment() {
     }
@@ -29,17 +32,40 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         rootView.setBackgroundColor(((MainActivity)getActivity()).currentColor);
 
-        allFiles = FileHandler.getAllFiles();
+        fileHandler = new FileHandler();
 
         mItemList = (ListView) rootView.findViewById(R.id.fileList);
 
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[allFiles.length - 1];
+        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[fileHandler.allFiles.length];
 
         int count = 0;
 
-        for(File file : allFiles)
+        for(File file : fileHandler.allFiles)
         {
-            //drawerItem[count] = new ObjectDrawerItem(icon, "Name");
+            String mimeType = fileHandler.fileTypes.get(file);
+
+            if(mimeType.equals("application/pdf"))
+            {
+                drawerItem[count] = new ObjectDrawerItem(R.drawable.ic_pdf, file.getName());
+            }
+            else
+            {
+                String shortType = mimeType.substring(0, mimeType.lastIndexOf('/'));
+                switch(shortType)
+                {
+                    case "text":
+                        drawerItem[count] = new ObjectDrawerItem(R.drawable.ic_text, file.getName());
+                        break;
+                    case "audio":
+                        drawerItem[count] = new ObjectDrawerItem(R.drawable.ic_audio, file.getName());
+                        break;
+                    case "video":
+                        drawerItem[count] = new ObjectDrawerItem(R.drawable.ic_video, file.getName());
+                        break;
+                    default:
+                        Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
+                }
+            }
             count++;
         }
 
@@ -54,12 +80,53 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
+            selectItem(position, view);
         }
 
     }
 
-    private void selectItem(int position) {
+    private void selectItem(int position, View view)
+    {
+        File chosenFile = fileHandler.allFiles[position];
+        String mimeType = fileHandler.fileTypes.get(chosenFile);
+        Context context = view.getContext();
+        if(mimeType.equals("application/pdf"))
+        {
+            fileHandler.openPDF(chosenFile,context);
+        }
+        else
+        {
+            String shortType = mimeType.substring(0, mimeType.lastIndexOf('/'));
+            int duration;
+            String text;
+            Toast toast;
 
+            switch(shortType)
+            {
+                case "text":
+                    //Open Text File
+                    text = "Noch keine Unterstützung für Textfiles";
+                    duration = Toast.LENGTH_SHORT;
+                    toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    break;
+                case "audio":
+                    //Open Audio File
+                    text = "Noch keine Unterstützung für Audiofiles";
+                    duration = Toast.LENGTH_SHORT;
+                    toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    break;
+                case "video":
+                    //Open Video File
+                    text = "Noch keine Unterstützung für Videofiles";
+                    duration = Toast.LENGTH_SHORT;
+                    toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    break;
+                default:
+                    Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
+            }
+        }
     }
 }
