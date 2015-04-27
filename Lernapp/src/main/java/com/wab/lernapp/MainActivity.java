@@ -97,7 +97,7 @@ public class MainActivity extends Activity  implements View.OnClickListener {
          // Handle presses on the action bar items
          int id = item.getItemId();
          if (id == R.id.action_settings) {
-             Intent intent = new Intent(this, settings.class);
+             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
              startActivity(intent);
              return true;
          }
