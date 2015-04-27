@@ -34,7 +34,7 @@ public class MainActivity extends Activity  implements View.OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        themeUtils.onActivityCreateSetTheme(this);
+        ThemeUtils.onActivityCreateSetTheme(this);
         activity = this;
         setContentView(R.layout.activity_main);
         mTitle = mDrawerTitle = getTitle();
@@ -138,13 +138,13 @@ public class MainActivity extends Activity  implements View.OnClickListener {
         switch (v.getId()){
             case R.id.greenbutton:
 
-                themeUtils.changeToTheme(this, themeUtils.GREEN);
+                ThemeUtils.changeToTheme(this, ThemeUtils.GREEN);
 
                 break;
 
             case R.id.purplebutton:
 
-                themeUtils.changeToTheme(this, themeUtils.PURPLE);
+                ThemeUtils.changeToTheme(this, ThemeUtils.PURPLE);
 
                 break;
     }
