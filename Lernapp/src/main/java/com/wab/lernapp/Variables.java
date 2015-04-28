@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
  */
 public class Variables
 {
+    public static long startTimeTmp;
+
     private static SharedPreferences mPrefs;
     public static long autoTime;
     public static long learnTime;

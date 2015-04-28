@@ -209,6 +209,17 @@ public class MainActivity extends Activity  implements View.OnClickListener {
         mDrawerToggle.syncState();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        long endTime = System.nanoTime();
+        long delta = endTime - Variables.startTimeTmp;
+        Variables.learnTime += (delta/1e9);
+        Variables.saveLearnTime();
+    }
+
   /*  private void setCurrentColor(){
         mDrawerList.setBackgroundColor(currentColor);
         getActionBar().setBackgroundDrawable(new ColorDrawable(currentColor));

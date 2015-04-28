@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
         Context context = view.getContext();
         if(mimeType.equals("application/pdf"))
         {
-            fileHandler.openPDF(chosenFile,context);
+            fileHandler.openPDF(chosenFile, this.getActivity());
         }
         else
         {

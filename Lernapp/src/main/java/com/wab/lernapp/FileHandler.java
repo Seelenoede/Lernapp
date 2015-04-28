@@ -1,5 +1,6 @@
 package com.wab.lernapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -67,12 +68,15 @@ public class FileHandler
         return allFiles;
     }
 
-    public void openPDF(File src, Context mContext)
+    public void openPDF(File src, Activity activity)
     {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(src), "application/pdf");
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        mContext.startActivity(intent);
+        Variables.startTimeTmp = System.nanoTime();
+        activity.startActivityForResult(intent, 0);
+
+
     }
 
     private static String getMimeType(File file)
