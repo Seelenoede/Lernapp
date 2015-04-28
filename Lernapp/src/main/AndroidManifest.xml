@@ -27,10 +27,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".settings"
+            android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".MainActivity" >
-
+    <!-- intent-filter wird benötigt um Lerntyp-Test-Activity aufrufen zu können-->
+            <intent-filter>
+                <action android:name=".SettingsActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

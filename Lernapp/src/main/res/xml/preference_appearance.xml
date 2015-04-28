@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:dialogTitle="@string/appearance"
+        android:key="preference_appearance"
+        android:summary=""
+        android:title="@string/appearance"
+        android:entries="@array/default_colors"
+        android:entryValues="@array/default_colors"
+        android:defaultValue="@array/default_colors"
+        />
+</PreferenceScreen>

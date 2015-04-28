@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <MultiSelectListPreference
+        android:dialogTitle="@string/didactic_type"
+        android:key="preference_didactic_type"
+        android:summary="Lege deinen Lerntyp manuell fest"
+        android:title="@string/didactic_type"
+        android:entries="@array/default_didactic_types"
+        android:entryValues="@array/default_didactic_types"
+        android:defaultValue="@array/default_didactic_types"
+        />
+    <PreferenceScreen
+        android:key="preference_didactic_type_test"
+        android:title="@string/didactic_type_test"
+        android:summary="Starte den Lerntypentest erneut">
+        <!--TODO: Verweist noch auf falsche Activity siehe ToDo "Lerntypentest als Fragment der Einst..." -->
+        <intent android:action=".SettingsActivity" />
+    </PreferenceScreen>
+</PreferenceScreen>

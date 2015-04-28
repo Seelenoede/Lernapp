@@ -18,12 +18,35 @@
         <item>Auswertungen</item>
         <item>Lerntipps</item>
     </string-array>
+
     <string-array name="spinner_colors_item_array">
         <item>Grün</item>
         <item>Rosa</item>
         <item>Gelb</item>
         <item>Blau</item>
     </string-array>
+
+
+<!--#########################-->
+<!-- Begin Preferences Values-->
+<!--#########################-->
     <string name="title_activity_settings">settings</string>
+<!--Preferences for didactic type-->
+    <string name="didactic_type">Lerntyp auswählen</string>
+    <string-array name="default_didactic_types">
+        <item>visuell</item>
+        <item>auditiv</item>
+        <item>Mischtyp</item>
+    </string-array>
+    <string name="didactic_type_test">Lerntyp-Test starten</string>
+<!--Preferences for appearance-->
+    <string name="appearance">Aussehen ändern</string>
+    <string-array name="default_colors">
+        <item>Grün</item>
+        <item>Rosa</item>
+        <item>Gelb</item>
+        <item>Blau</item>
+    </string-array>
+
 
 </resources>
