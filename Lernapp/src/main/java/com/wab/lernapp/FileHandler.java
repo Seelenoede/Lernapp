@@ -10,6 +10,8 @@ import android.webkit.MimeTypeMap;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -73,10 +75,14 @@ public class FileHandler
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(src), "application/pdf");
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH");
+        Variables.startDateTmpH = Integer.parseInt(sdf.format(new Date()));
+        sdf = new SimpleDateFormat("mm:ss");
+        Variables.startDateTmp = sdf.format(new Date());
         Variables.startTimeTmp = System.nanoTime();
+
         activity.startActivityForResult(intent, 0);
-
-
     }
 
     private static String getMimeType(File file)

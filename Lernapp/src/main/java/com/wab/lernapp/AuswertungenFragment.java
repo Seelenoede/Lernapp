@@ -44,33 +44,20 @@ public class AuswertungenFragment extends Fragment {
     private void doDrawZeit(View view)
     {
         GraphView graph = (GraphView) view.findViewById(R.id.graphZeit);
-        //Need counter for y Value
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6),
-                new DataPoint(5, 1),
-                new DataPoint(6, 1),
-                new DataPoint(7, 1),
-                new DataPoint(8, 1),
-                new DataPoint(9, 1),
-                new DataPoint(10, 1),
-                new DataPoint(11, 1),
-                new DataPoint(12, 1),
-                new DataPoint(13, 1),
-                new DataPoint(14, 1),
-                new DataPoint(15, 1),
-                new DataPoint(16, 1),
-                new DataPoint(17, 1),
-                new DataPoint(18, 1),
-                new DataPoint(19, 1),
-                new DataPoint(20, 1),
-                new DataPoint(21, 1),
-                new DataPoint(22, 1),
-                new DataPoint(23, 1)
-        });
+
+        DataPoint[] dataPoints = new DataPoint[24];
+        for(int i=0; i<24; i++)
+        {
+            if(Variables.learnTimes[i] != 0)
+            {
+                dataPoints[i] = new DataPoint(i, (double) Variables.learnTimes[i] / Variables.learnTime * 100);
+            }
+            else
+            {
+                dataPoints[i] = new DataPoint(i, 0);
+            }
+        }
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
 
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
