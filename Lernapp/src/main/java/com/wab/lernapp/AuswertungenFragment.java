@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -17,8 +18,20 @@ public class AuswertungenFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        String text;
         View rootView = inflater.inflate(R.layout.fragment_auswertungen, container, false);
+
+        TextView textAuto = (TextView) rootView.findViewById(R.id.textAutozeit);
+        text = Long.toString(Variables.autoTime);
+        textAuto.setText(text + " Sekunden");
+
+        TextView textLern = (TextView) rootView.findViewById(R.id.textLernzeit);
+        text = Long.toString(Variables.learnTime);
+        textLern.setText(text + " Sekunden");
+
+        TextView textDurchschnitt = (TextView) rootView.findViewById(R.id.textDurchschnitt);
+        text = Double.toString(Variables.averageGrade);
+        textDurchschnitt.setText(text);
 
         doDrawZeit(rootView);
 
