@@ -34,8 +34,12 @@ public class MainActivity extends Activity  implements View.OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
         ThemeUtils.onActivityCreateSetTheme(this);
         activity = this;
+
+        Variables.loadVars(activity.getApplicationContext());
+
         setContentView(R.layout.activity_main);
         mTitle = mDrawerTitle = getTitle();
 
