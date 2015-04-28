@@ -5,17 +5,28 @@ import android.content.SharedPreferences;
 
 /**
  * Created by Student on 28.04.2015.
+ *
+ * In this class the values for Auswertung are saved and loaded
  */
 public class Variables
 {
-    //These vars are used for transmitting values from FileHandler to MainActivity
+    /**
+     * These vars are used for transmitting values from FileHandler to MainActivity
+     * Not for real use
+     */
     public static long startTimeTmp;
     public static int startDateTmpH;
     public static String startDateTmp;
 
-    public static long[] learnTimes;
     private static SharedPreferences mPrefs;
-    public static long autoTime;
+
+    /**
+     * All vars that can be used everywhere
+     *
+     * TODO: add testResults
+     */
+    public static long[] learnTimes;
+    public static long carTime;
     public static long learnTime;
     public static double averageGrade;
 
@@ -24,7 +35,7 @@ public class Variables
         mPrefs = context.getSharedPreferences("Vars", 0);
 
         learnTimes = new long[24];
-        autoTime = mPrefs.getLong("autoTime", 0);
+        carTime = mPrefs.getLong("carTime", 0);
         learnTime = mPrefs.getLong("learnTime", 0);
         averageGrade = Double.parseDouble(mPrefs.getString("averageGrade", "0.0"));
 
@@ -34,10 +45,13 @@ public class Variables
         }
     }
 
-    public static void saveAutoTime()
+    /**
+     * save values to phone
+     */
+    public static void saveCarTime()
     {
         SharedPreferences.Editor mEditor = mPrefs.edit();
-        mEditor.putLong("autoTime", autoTime).commit();
+        mEditor.putLong("carTime", carTime).commit();
     }
 
     public static void saveLearnTime()
@@ -58,4 +72,25 @@ public class Variables
         mEditor.putLong("learnTimes" + index, learnTimes[index]).commit();
     }
 
+    /**
+     * delete all saved values
+     */
+    public static void deleteValues()
+    {
+        carTime = 0;
+        learnTime = 0;
+        averageGrade = 0.0;
+
+        for(int i=0; i<24; i++)
+        {
+            learnTimes[i] = 0;
+            saveLearnTimes(i);
+        }
+
+        saveCarTime();
+        saveAverageGrade();
+        saveLearnTime();
+
+        //TODO: add testResults
+    }
 }

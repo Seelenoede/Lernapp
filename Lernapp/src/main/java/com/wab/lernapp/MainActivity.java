@@ -211,7 +211,7 @@ public class MainActivity extends Activity  implements View.OnClickListener {
         mDrawerToggle.syncState();
     }
 
-    //Wenn ein Intent geschlossen wird, wird folgendes ausgeführt
+    //Wenn ein Intent geschlossen wird, wird folgende Funktion ausgeführt
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -229,6 +229,9 @@ public class MainActivity extends Activity  implements View.OnClickListener {
         SimpleDateFormat sdf = new SimpleDateFormat("HH");
         int endDateH = Integer.parseInt(sdf.format(new Date()));
 
+        /**
+         * Check if closed in different hour (e.g. starts 09:00 and ends 11:00)
+         */
         if(endDateH == Variables.startDateTmpH)
         {
             Variables.learnTimes[endDateH] += timeLearned;
@@ -262,7 +265,6 @@ public class MainActivity extends Activity  implements View.OnClickListener {
                     restM = 0;
                 }
             }
-
         }
     }
 

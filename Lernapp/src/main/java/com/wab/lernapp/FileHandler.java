@@ -1,12 +1,14 @@
 package com.wab.lernapp;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+import android.widget.Toast;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -16,6 +18,8 @@ import java.util.HashMap;
 
 /**
  * Created by pmeyerbu on 23.04.2015.
+ *
+ * In this class files are get from phone and are opened
  */
 public class FileHandler
 {
@@ -42,6 +46,10 @@ public class FileHandler
         }
     }
 
+    /**
+     * get all files that are stored in /sdcard/Lernapp/
+     * @return files from /sdcard/Lernapp/
+     */
     private static File[] getAllFiles()
     {
         //auf S5 interner Speicher, bei Nexus 5 keine Ahnung
@@ -70,6 +78,11 @@ public class FileHandler
         return allFiles;
     }
 
+    /**
+     * Opens PDF file using an Intent
+     * @param src Source file
+     * @param activity Activity from caller
+     */
     public void openPDF(File src, Activity activity)
     {
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -82,9 +95,24 @@ public class FileHandler
         Variables.startDateTmp = sdf.format(new Date());
         Variables.startTimeTmp = System.nanoTime();
 
-        activity.startActivityForResult(intent, 0);
+        //If there is no app installed that can open PDF files an exception is thrown
+        try
+        {
+            activity.startActivityForResult(intent, 0);
+        }
+        catch(ActivityNotFoundException e)
+        {
+            Toast toast = Toast.makeText(activity.getBaseContext(), "Keine App für PDF vorhanden", Toast.LENGTH_SHORT);
+            toast.show();
+            Log.e(TAG, "Keine App zum Anzeigen von PDFs vorhanden.");
+        }
     }
 
+    /**
+     * Get Mime Type from file
+     * @param file Input File
+     * @return MimeType
+     */
     private static String getMimeType(File file)
     {
         String type = null;

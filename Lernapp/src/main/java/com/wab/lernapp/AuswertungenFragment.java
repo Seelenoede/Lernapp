@@ -13,6 +13,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 /**
  * Created by Student on 14.04.2015.
+ *
+ * In this class the values from Variables are shown
  */
 public class AuswertungenFragment extends Fragment {
 
@@ -22,7 +24,7 @@ public class AuswertungenFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_auswertungen, container, false);
 
         TextView textAuto = (TextView) rootView.findViewById(R.id.textAutozeit);
-        text = Long.toString(Variables.autoTime);
+        text = Long.toString(Variables.carTime);
         textAuto.setText(text + " Sekunden");
 
         TextView textLern = (TextView) rootView.findViewById(R.id.textLernzeit);
@@ -33,7 +35,7 @@ public class AuswertungenFragment extends Fragment {
         text = Double.toString(Variables.averageGrade);
         textDurchschnitt.setText(text);
 
-        doDrawZeit(rootView);
+        doDrawTime(rootView);
 
         //Only if done any tests
         doDrawTests(rootView);
@@ -41,7 +43,11 @@ public class AuswertungenFragment extends Fragment {
         return rootView;
     }
 
-    private void doDrawZeit(View view)
+    /**
+     * Draw the Graph for the learning times
+     * @param view View to which the graph is drawn
+     */
+    private void doDrawTime(View view)
     {
         GraphView graph = (GraphView) view.findViewById(R.id.graphZeit);
 
@@ -72,6 +78,11 @@ public class AuswertungenFragment extends Fragment {
         graph.addSeries(series);
     }
 
+    /**
+     * Draw graph for all test results
+     * TODO: give real values
+     * @param view View to which the graph is drawn
+     */
     private void doDrawTests(View view)
     {
         DataPoint[] points = {new DataPoint(2,2), new DataPoint(3,6)};

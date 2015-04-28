@@ -32,7 +32,7 @@ public class AutomodusFragment extends Fragment{
         endTime = System.nanoTime();
         long delta = endTime - startTime;
 
-        Variables.autoTime += (delta/1e9);
-        Variables.saveAutoTime();
+        Variables.carTime += (delta/1e9);
+        Variables.saveCarTime();
     }
 }
