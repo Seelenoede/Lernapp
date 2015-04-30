@@ -85,6 +85,7 @@ public class FileHandler
      */
     public void openPDF(File src, Activity activity)
     {
+        Log.d(TAG, "Open PDF");
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(src), "application/pdf");
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

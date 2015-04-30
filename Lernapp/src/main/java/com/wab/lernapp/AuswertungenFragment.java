@@ -25,6 +25,8 @@ import java.text.NumberFormat;
  */
 public class AuswertungenFragment extends Fragment {
 
+    private static final String TAG = "AuswertungFragment";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         String text;
@@ -43,8 +45,6 @@ public class AuswertungenFragment extends Fragment {
         textDurchschnitt.setText(text);
 
         doDrawTime(rootView);
-
-        //Only if done any tests
         doDrawTests(rootView);
 
         return rootView;
@@ -56,6 +56,7 @@ public class AuswertungenFragment extends Fragment {
      */
     private void doDrawTime(View view)
     {
+        Log.d(TAG, "Zeichne Lernzeit-Graph");
         final GraphView graph = (GraphView) view.findViewById(R.id.graphZeit);
 
         DataPoint[] dataPoints = new DataPoint[24];
@@ -130,6 +131,7 @@ public class AuswertungenFragment extends Fragment {
      */
     private void doDrawTests(View view)
     {
+        Log.d(TAG, "Zeichne Testergebnis-Graph");
         DataPoint[] points = new DataPoint[Variables.gradeCount];
         for(int i = 0; i<Variables.gradeCount; i++)
         {

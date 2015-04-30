@@ -2,6 +2,7 @@ package com.wab.lernapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 /**
  * Created by Student on 28.04.2015.
@@ -10,6 +11,7 @@ import android.content.SharedPreferences;
  */
 public class Variables
 {
+    private static final String TAG = "Variables";
     /**
      * These vars are used for transmitting values from FileHandler to MainActivity
      * Not for real use
@@ -32,6 +34,7 @@ public class Variables
 
     public static void loadVars(Context context)
     {
+        Log.d(TAG, "Load Variables");
         mPrefs = context.getSharedPreferences("Vars", 0);
 
         learnTimes = new long[24];
@@ -68,24 +71,28 @@ public class Variables
      */
     public static void saveCarTime()
     {
+        Log.d(TAG, "Save state car time: " + carTime);
         SharedPreferences.Editor mEditor = mPrefs.edit();
         mEditor.putLong("carTime", carTime).commit();
     }
 
     public static void saveLearnTime()
     {
+        Log.d(TAG, "Save state learn time: " + learnTime);
         SharedPreferences.Editor mEditor = mPrefs.edit();
         mEditor.putLong("learnTime", learnTime).commit();
     }
 
     public static void saveAverageGrade()
     {
+        Log.d(TAG, "Save state average grade: " + averageGrade);
         SharedPreferences.Editor mEditor = mPrefs.edit();
         mEditor.putString("averageGrade", Double.toString(averageGrade)).commit();
     }
 
     public static void saveLearnTimes(int index)
     {
+        Log.d(TAG, "Save state learn time " + index + ": " + learnTimes[index]);
         SharedPreferences.Editor mEditor = mPrefs.edit();
         mEditor.putLong("learnTimes" + index, learnTimes[index]).commit();
     }
@@ -122,6 +129,7 @@ public class Variables
      */
     public static void deleteValues()
     {
+        Log.d(TAG, "Delete grades");
         carTime = 0;
         learnTime = 0;
         averageGrade = 0.0;
