@@ -2,41 +2,147 @@ package com.wab.lernapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 /**
  * Created by Student on 28.04.2015.
+ *
+ * In this class the values for Auswertung are saved and loaded
  */
 public class Variables
 {
+    private static final String TAG = "Variables";
+    /**
+     * These vars are used for transmitting values from FileHandler to MainActivity
+     * Not for real use
+     */
+    public static long startTimeTmp;
+    public static int startDateTmpH;
+    public static String startDateTmp;
+
     private static SharedPreferences mPrefs;
-    public static long autoTime;
+
+    /**
+     * All vars that can be used everywhere
+     */
+    public static long[] learnTimes;
+    public static long carTime;
     public static long learnTime;
     public static double averageGrade;
+    public static double[] allGrades;
+    public static int gradeCount;
 
     public static void loadVars(Context context)
     {
+        Log.d(TAG, "Load Variables");
         mPrefs = context.getSharedPreferences("Vars", 0);
 
-        autoTime = mPrefs.getLong("autoTime", 0);
+        learnTimes = new long[24];
+        carTime = mPrefs.getLong("carTime", 0);
         learnTime = mPrefs.getLong("learnTime", 0);
         averageGrade = Double.parseDouble(mPrefs.getString("averageGrade", "0.0"));
+        gradeCount = mPrefs.getInt("gradeCount", 0);
+        allGrades = new double[gradeCount];
+
+        if(gradeCount!=0)
+        {
+            for(int i = 0; i<gradeCount; i++)
+            {
+                allGrades[i] = Double.parseDouble(mPrefs.getString("allGrades" + i, "0.0"));
+            }
+        }
+
+        for(int i=0; i<24; i++)
+        {
+            learnTimes[i] = mPrefs.getLong("learnTimes" + Integer.toString(i), 0);
+        }
     }
 
-    public static void saveAutoTime()
+    public static void reloadGrades()
     {
+        for(int i = 0; i<gradeCount; i++)
+        {
+            allGrades[i] = Double.parseDouble(mPrefs.getString("allGrades" + i, "0.0"));
+        }
+    }
+
+    /**
+     * save values to phone
+     */
+    public static void saveCarTime()
+    {
+        Log.d(TAG, "Save state car time: " + carTime);
         SharedPreferences.Editor mEditor = mPrefs.edit();
-        mEditor.putLong("autoTime", autoTime).commit();
+        mEditor.putLong("carTime", carTime).commit();
     }
 
     public static void saveLearnTime()
     {
+        Log.d(TAG, "Save state learn time: " + learnTime);
         SharedPreferences.Editor mEditor = mPrefs.edit();
         mEditor.putLong("learnTime", learnTime).commit();
     }
 
     public static void saveAverageGrade()
     {
+        Log.d(TAG, "Save state average grade: " + averageGrade);
         SharedPreferences.Editor mEditor = mPrefs.edit();
         mEditor.putString("averageGrade", Double.toString(averageGrade)).commit();
+    }
+
+    public static void saveLearnTimes(int index)
+    {
+        Log.d(TAG, "Save state learn time " + index + ": " + learnTimes[index]);
+        SharedPreferences.Editor mEditor = mPrefs.edit();
+        mEditor.putLong("learnTimes" + index, learnTimes[index]).commit();
+    }
+
+    public static void saveGrade(double grade)
+    {
+        SharedPreferences.Editor mEditor = mPrefs.edit();
+        mEditor.putString("allGrades" + gradeCount, Double.toString(grade));
+
+        gradeCount++;
+        mEditor.putInt("gradeCount", gradeCount);
+
+        reloadGrades();
+    }
+
+    /**
+     * delete all grades
+     *
+     * extra function because saving a grade is a little different than saving variables
+     */
+    private static void deleteGrades()
+    {
+        SharedPreferences.Editor mEditor = mPrefs.edit();
+        for(int i=0; i<gradeCount; i++)
+        {
+            mEditor.putString("allGrades" + i, "0.0");
+        }
+
+        mEditor.putInt("gradeCount", gradeCount);
+    }
+
+    /**
+     * delete all saved values
+     */
+    public static void deleteValues()
+    {
+        Log.d(TAG, "Delete grades");
+        carTime = 0;
+        learnTime = 0;
+        averageGrade = 0.0;
+
+        for(int i=0; i<24; i++)
+        {
+            learnTimes[i] = 0;
+            saveLearnTimes(i);
+        }
+
+        saveCarTime();
+        saveAverageGrade();
+        saveLearnTime();
+        deleteGrades();
     }
 }
