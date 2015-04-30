@@ -2,14 +2,21 @@ package com.wab.lernapp;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.text.NumberFormat;
 
 /**
  * Created by Student on 14.04.2015.
@@ -49,7 +56,7 @@ public class AuswertungenFragment extends Fragment {
      */
     private void doDrawTime(View view)
     {
-        GraphView graph = (GraphView) view.findViewById(R.id.graphZeit);
+        final GraphView graph = (GraphView) view.findViewById(R.id.graphZeit);
 
         DataPoint[] dataPoints = new DataPoint[24];
         for(int i=0; i<24; i++)
@@ -63,33 +70,78 @@ public class AuswertungenFragment extends Fragment {
                 dataPoints[i] = new DataPoint(i, 0);
             }
         }
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
 
+        //Set horizontal bounds to show whole graph
+        // -1 and 24 are used as padding
         graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(23);
+        graph.getViewport().setMinX(-1);
+        graph.getViewport().setMaxX(24);
 
-        /*
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(100) oder soweit es nicht den Graphen behindert;
-         */
+        //some more styling
+        series.setSpacing(20);
+        //TODO: series.setColor(enter Color here);
 
+        //add values to graph
         graph.addSeries(series);
+
+        //Format to show only integers
+        final NumberFormat nf = NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
+        nf.setMinimumIntegerDigits(1);
+        nf.setMaximumIntegerDigits(3);
+
+        //customize label layout
+        graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if (isValueX) {
+                    String label = nf.format(value);
+
+                    //hide the -1 and 24 label
+                    if((label.equals("-1")) || (label.equals("24")))
+                    {
+                        return "";
+                    }
+                    else
+                    {
+                        //show only integers
+                        return nf.format(value);
+                    }
+                }
+                else
+                {
+                    //show only integers
+                    return nf.format(value);
+                }
+            }
+        });
+
+        //Show 26 labels (also includes the label for -1 and 24)
+        graph.getGridLabelRenderer().setNumHorizontalLabels(26);
+
+        //Show only horizontal grid lines
+        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
     }
 
     /**
      * Draw graph for all test results
-     * TODO: give real values
      * @param view View to which the graph is drawn
      */
     private void doDrawTests(View view)
     {
-        DataPoint[] points = {new DataPoint(2,2), new DataPoint(3,6)};
-        //points = new DataPoint[anzahlTests];
-        //Load test results
+        DataPoint[] points = new DataPoint[Variables.gradeCount];
+        for(int i = 0; i<Variables.gradeCount; i++)
+        {
+            points[i] = new DataPoint(i + 1, Variables.allGrades[i]);
+        }
         GraphView graph = (GraphView) view.findViewById(R.id.graphTests);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
         graph.addSeries(series);
+
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
+
+        graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(nf, nf));
     }
 }

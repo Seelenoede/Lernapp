@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/txtLabel"
@@ -21,13 +21,34 @@
             android:textSize="16dp"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Gelernte Zeit:"
+            android:id="@+id/labelLearnTime"
+            android:layout_below="@+id/txtLabel"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Wie lange gelernt"
             android:id="@+id/textLernzeit"
             android:layout_below="@+id/txtLabel"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/labelLearnTime"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Zeit im Automodus:"
+            android:id="@+id/labelCarTime"
+            android:layout_below="@+id/labelLearnTime"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,7 +58,18 @@
             android:id="@+id/textAutozeit"
             android:layout_below="@+id/textLernzeit"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="false"
+            android:layout_toRightOf="@+id/labelCarTime"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Durchschnittsnote:"
+            android:id="@+id/labelAverageGrade"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_below="@+id/labelCarTime"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,14 +79,28 @@
             android:id="@+id/textDurchschnitt"
             android:layout_below="@+id/textAutozeit"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="false"
+            android:layout_toRightOf="@+id/labelAverageGrade"/>
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graphZeit"
-            android:layout_width="match_parent"
-            android:layout_height="200dip"
-            android:layout_below="@+id/textDurchschnitt"
-            android:layout_alignParentStart="true"/>
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/horizontalScrollView"
+            android:layout_below="@+id/textDurchschnitt">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent">
+
+                <com.jjoe64.graphview.GraphView
+                    android:id="@+id/graphZeit"
+                    android:layout_width="800dip"
+                    android:layout_height="200dip"
+                    android:layout_alignParentStart="true"
+                    />
+            </RelativeLayout>
+        </HorizontalScrollView>
+
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graphTests"
@@ -62,7 +108,7 @@
             android:layout_height="200dip"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/graphZeit"/>
+            android:layout_below="@+id/horizontalScrollView"/>
 
     </RelativeLayout>
 </ScrollView>
