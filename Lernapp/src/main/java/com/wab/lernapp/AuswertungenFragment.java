@@ -139,6 +139,9 @@ public class AuswertungenFragment extends Fragment {
         }
         GraphView graph = (GraphView) view.findViewById(R.id.graphTests);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
+
+        //TODO: series.setColor(addColorHere);
+
         graph.addSeries(series);
 
         NumberFormat nf = NumberFormat.getInstance();
