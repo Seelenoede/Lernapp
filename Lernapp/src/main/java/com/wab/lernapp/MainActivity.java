@@ -217,55 +217,7 @@ public class MainActivity extends Activity  implements View.OnClickListener {
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        long endTime = System.nanoTime();
-        long delta = endTime - Variables.startTimeTmp;
-        long timeLearned = 0;
-        timeLearned += delta/1e9;
-        Variables.learnTime += timeLearned;
-        Variables.saveLearnTime();
-
-        int startDateM = Integer.parseInt(Variables.startDateTmp.substring(0,2));
-        int startDateS = Integer.parseInt(Variables.startDateTmp.substring(3));
-        SimpleDateFormat sdf = new SimpleDateFormat("HH");
-        int endDateH = Integer.parseInt(sdf.format(new Date()));
-
-        /**
-         * Check if closed in different hour (e.g. starts 09:00 and ends 11:00)
-         */
-        if(endDateH == Variables.startDateTmpH)
-        {
-            Variables.learnTimes[endDateH] += timeLearned;
-            Variables.saveLearnTimes(endDateH);
-        }
-        else
-        {
-            long restM = timeLearned/60;
-            int timeDiff = 1;
-
-            Variables.learnTimes[Variables.startDateTmpH] += (60 - startDateM)*60 - startDateS;
-            Variables.saveLearnTimes(Variables.startDateTmpH);
-            restM = restM - 60 + startDateM;
-            timeLearned = timeLearned - (60-startDateM)*60 + startDateS;
-
-            while(restM != 0)
-            {
-                if(restM >= 60)
-                {
-                    Variables.learnTimes[Variables.startDateTmpH + timeDiff] += 60*60;
-                    Variables.saveLearnTimes(Variables.startDateTmpH + timeDiff);
-                    restM = restM - 60;
-                    timeLearned = timeLearned - 3600;
-                    timeDiff++;
-                }
-                else
-                {
-                    timeLearned = timeLearned - restM*60;
-                    Variables.learnTimes[Variables.startDateTmpH + timeDiff] += restM*60 + timeLearned;
-                    Variables.saveLearnTimes(Variables.startDateTmpH + timeDiff);
-                    restM = 0;
-                }
-            }
-        }
+        Variables.saveLearnTimeBoth();
     }
 
   /*  private void setCurrentColor(){

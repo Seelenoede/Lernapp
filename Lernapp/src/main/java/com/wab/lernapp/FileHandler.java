@@ -1,8 +1,9 @@
 package com.wab.lernapp;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
@@ -12,8 +13,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -90,12 +89,6 @@ public class FileHandler
         intent.setDataAndType(Uri.fromFile(src), "application/pdf");
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("HH");
-        Variables.startDateTmpH = Integer.parseInt(sdf.format(new Date()));
-        sdf = new SimpleDateFormat("mm:ss");
-        Variables.startDateTmp = sdf.format(new Date());
-        Variables.startTimeTmp = System.nanoTime();
-
         //If there is no app installed that can open PDF files an exception is thrown
         try
         {
@@ -107,6 +100,22 @@ public class FileHandler
             toast.show();
             Log.e(TAG, "Keine App zum Anzeigen von PDFs vorhanden.");
         }
+    }
+
+    /**
+     * Opens a video file
+     *
+     * @param src Input file
+     * @param baseActivity ö
+     */
+    public void openVideo(File src, Activity baseActivity)
+    {
+        Log.d(TAG, "Open Video");
+
+        Fragment fragment = VideoFragment.newInstance(src);
+
+        FragmentManager fragmentManager = baseActivity.getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 
     /**

@@ -14,13 +14,13 @@ import android.widget.Toast;
 import java.io.File;
 
 /**
+ *
  * Created by Student on 14.04.2015.
  */
 public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
 
-    private ListView mItemList;
     FileHandler fileHandler;
 
     public HomeFragment() {
@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
 
         fileHandler = new FileHandler();
 
-        mItemList = (ListView) rootView.findViewById(R.id.fileList);
+        ListView mItemList = (ListView) rootView.findViewById(R.id.fileList);
 
         ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[fileHandler.allFiles.length];
 
@@ -90,6 +90,7 @@ public class HomeFragment extends Fragment {
         File chosenFile = fileHandler.allFiles[position];
         String mimeType = fileHandler.fileTypes.get(chosenFile);
         Context context = view.getContext();
+        Variables.setStartTimes();
         if(mimeType.equals("application/pdf"))
         {
             fileHandler.openPDF(chosenFile, this.getActivity());
@@ -119,10 +120,7 @@ public class HomeFragment extends Fragment {
                     break;
                 case "video":
                     //Open Video File
-                    text = "Noch keine Unterstützung für Videofiles";
-                    duration = Toast.LENGTH_SHORT;
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    fileHandler.openVideo(chosenFile, this.getActivity());
                     break;
                 default:
                     Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
