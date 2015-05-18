@@ -112,10 +112,50 @@ public class FileHandler
     {
         Log.d(TAG, "Open Video");
 
-        Fragment fragment = VideoFragment.newInstance(src);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(src), "video/*");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
-        FragmentManager fragmentManager = baseActivity.getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        try
+        {
+            baseActivity.startActivityForResult(intent, 0);
+        }
+        catch(ActivityNotFoundException e)
+        {
+            Toast toast = Toast.makeText(baseActivity.getBaseContext(), "Keine App für Videos vorhanden", Toast.LENGTH_SHORT);
+            toast.show();
+            Log.e(TAG, "Keine App zum Anzeigen von Videos vorhanden.");
+        }
+
+//        Fragment fragment = VideoFragment.newInstance(src);
+//
+//        FragmentManager fragmentManager = baseActivity.getFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    }
+
+    /**
+     * Opens audio files
+     * @param src Input file
+     * @param baseActivity base activity
+     */
+    public void openAudio(File src, Activity baseActivity)
+    {
+        Log.d(TAG, "Open Audio");
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(src), "audio/*");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+        try
+        {
+            baseActivity.startActivityForResult(intent, 0);
+        }
+        catch(ActivityNotFoundException e)
+        {
+            Toast toast = Toast.makeText(baseActivity.getBaseContext(), "Keine App für Audio vorhanden", Toast.LENGTH_SHORT);
+            toast.show();
+            Log.e(TAG, "Keine App zum Abspielen von Audiodateien vorhanden.");
+        }
     }
 
     /**

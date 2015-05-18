@@ -113,10 +113,7 @@ public class HomeFragment extends Fragment {
                     break;
                 case "audio":
                     //Open Audio File
-                    text = "Noch keine Unterstützung für Audiofiles";
-                    duration = Toast.LENGTH_SHORT;
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    fileHandler.openAudio(chosenFile, this.getActivity());
                     break;
                 case "video":
                     //Open Video File
