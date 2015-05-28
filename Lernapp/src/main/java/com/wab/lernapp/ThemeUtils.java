@@ -2,7 +2,10 @@ package com.wab.lernapp;
 
 import android.app.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.util.TypedValue;
 
 
 public class ThemeUtils
@@ -57,4 +60,8 @@ public class ThemeUtils
 
     }
 
+    public static int getCurrentTheme()
+    {
+        return cTheme;
+    }
 }

@@ -1,7 +1,6 @@
 package com.wab.lernapp;
 
 import android.app.Fragment;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -103,15 +102,26 @@ public class AuswertungenFragment extends Fragment {
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
 
         //Set horizontal bounds to show whole graph
-        // -1 and 24 are used as padding
+        // -1 and +1 are used as padding
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(firstTime - 1);
         graph.getViewport().setMaxX(lastTime + 1);
 
         //some more styling
         series.setSpacing(20);
-        series.setColor(R.attr.colorControlActivated);
-        //series.setColor(getResources().getColor(R.color.lightgelb));
+
+        //TODO: in future try to get colorAccent
+        switch(ThemeUtils.getCurrentTheme())
+        {
+            case ThemeUtils.GREEN:
+                series.setColor(getResources().getColor(R.color.pink));
+                break;
+            case ThemeUtils.PURPLE:
+                series.setColor(getResources().getColor(R.color.lightgelb));
+                break;
+            default:
+                series.setColor(getResources().getColor(R.color.darkred));
+        }
 
         //add values to graph
         graph.addSeries(series);
@@ -125,7 +135,7 @@ public class AuswertungenFragment extends Fragment {
         final int padLeft = firstTime - 1;
         final int padRight = lastTime + 1;
 
-        //customize label layout
+        //customize label layout and remove first and last index
         graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
             @Override
             public String formatLabel(double value, boolean isValueX) {
@@ -151,7 +161,7 @@ public class AuswertungenFragment extends Fragment {
             }
         });
 
-        //Show 26 labels (also includes the label for -1 and 24)
+        //this is to ensure that the labels stand right below their bars
         graph.getGridLabelRenderer().setNumHorizontalLabels(padRight - padLeft + 1);
 
         //Show only horizontal grid lines
@@ -173,7 +183,18 @@ public class AuswertungenFragment extends Fragment {
         GraphView graph = (GraphView) view.findViewById(R.id.graphTests);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
 
-        //TODO: series.setColor(addColorHere);
+        //TODO: in future try to get colorAccent
+        switch(ThemeUtils.getCurrentTheme())
+        {
+            case ThemeUtils.GREEN:
+                series.setColor(getResources().getColor(R.color.pink));
+                break;
+            case ThemeUtils.PURPLE:
+                series.setColor(getResources().getColor(R.color.lightgelb));
+                break;
+            default:
+                series.setColor(getResources().getColor(R.color.darkred));
+        }
 
         graph.addSeries(series);
 
