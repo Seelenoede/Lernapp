@@ -1,9 +1,9 @@
 package com.wab.lernapp;
 
 import android.app.Fragment;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,14 +44,34 @@ public class AuswertungenFragment extends Fragment {
         text = Double.toString(Variables.averageGrade);
         textDurchschnitt.setText(text);
 
-        doDrawTime(rootView);
-        doDrawTests(rootView);
+        rootView.findViewById(R.id.graphZeit).setVisibility(View.INVISIBLE);
+
+        for(long i : Variables.learnTimes)
+        {
+            if (i != 0)
+            {
+                doDrawTime(rootView);
+                rootView.findViewById(R.id.graphZeit).setVisibility(View.VISIBLE);
+                break;
+            }
+        }
+
+
+        if(Variables.gradeCount>0)
+        {
+            doDrawTests(rootView);
+        }
+        else
+        {
+            rootView.findViewById(R.id.graphTests).setVisibility(View.INVISIBLE);
+        }
 
         return rootView;
     }
 
     /**
      * Draw the Graph for the learning times
+     * TODO: compress graph now in the horizontal
      * @param view View to which the graph is drawn
      */
     private void doDrawTime(View view)
@@ -59,12 +79,21 @@ public class AuswertungenFragment extends Fragment {
         Log.d(TAG, "Zeichne Lernzeit-Graph");
         final GraphView graph = (GraphView) view.findViewById(R.id.graphZeit);
 
+        int firstTime = -1;
+        int lastTime = 0;
+
         DataPoint[] dataPoints = new DataPoint[24];
         for(int i=0; i<24; i++)
         {
             if(Variables.learnTimes[i] != 0)
             {
                 dataPoints[i] = new DataPoint(i, (double) Variables.learnTimes[i] / Variables.learnTime * 100);
+
+                if(firstTime == -1)
+                {
+                    firstTime = i;
+                }
+                lastTime = i;
             }
             else
             {
@@ -76,12 +105,13 @@ public class AuswertungenFragment extends Fragment {
         //Set horizontal bounds to show whole graph
         // -1 and 24 are used as padding
         graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(-1);
-        graph.getViewport().setMaxX(24);
+        graph.getViewport().setMinX(firstTime - 1);
+        graph.getViewport().setMaxX(lastTime + 1);
 
         //some more styling
         series.setSpacing(20);
-        //TODO: series.setColor(enter Color here);
+        series.setColor(R.attr.colorControlActivated);
+        //series.setColor(getResources().getColor(R.color.lightgelb));
 
         //add values to graph
         graph.addSeries(series);
@@ -92,6 +122,9 @@ public class AuswertungenFragment extends Fragment {
         nf.setMinimumIntegerDigits(1);
         nf.setMaximumIntegerDigits(3);
 
+        final int padLeft = firstTime - 1;
+        final int padRight = lastTime + 1;
+
         //customize label layout
         graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
             @Override
@@ -100,7 +133,7 @@ public class AuswertungenFragment extends Fragment {
                     String label = nf.format(value);
 
                     //hide the -1 and 24 label
-                    if((label.equals("-1")) || (label.equals("24")))
+                    if((label.equals(String.valueOf(padLeft))) || (label.equals(String.valueOf(padRight))))
                     {
                         return "";
                     }
@@ -119,7 +152,7 @@ public class AuswertungenFragment extends Fragment {
         });
 
         //Show 26 labels (also includes the label for -1 and 24)
-        graph.getGridLabelRenderer().setNumHorizontalLabels(26);
+        graph.getGridLabelRenderer().setNumHorizontalLabels(padRight - padLeft + 1);
 
         //Show only horizontal grid lines
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
@@ -148,5 +181,14 @@ public class AuswertungenFragment extends Fragment {
         nf.setMaximumFractionDigits(0);
 
         graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(nf, nf));
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        getActivity().getActionBar().setTitle("Auswertungen");
+        MainActivity.setDrawerSelected(2);
     }
 }

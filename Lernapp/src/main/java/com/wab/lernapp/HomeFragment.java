@@ -124,4 +124,13 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        getActivity().getActionBar().setTitle("Home");
+        MainActivity.setDrawerSelected(0);
+    }
 }

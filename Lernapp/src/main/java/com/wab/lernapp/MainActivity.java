@@ -26,7 +26,7 @@ public class MainActivity extends Activity  implements View.OnClickListener {
     Activity activity;
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    private static ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -88,8 +88,10 @@ public class MainActivity extends Activity  implements View.OnClickListener {
         getActionBar().setHomeButtonEnabled(true);
 
         findViewById(R.id.greenbutton).setOnClickListener(this);
+        //findViewById(R.id.greenbutton).setVisibility(View.INVISIBLE);
 
         findViewById(R.id.purplebutton).setOnClickListener(this);
+        //findViewById(R.id.purplebutton).setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -189,7 +191,7 @@ public class MainActivity extends Activity  implements View.OnClickListener {
 
         if (fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("tag").commit();
 
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);
@@ -218,6 +220,12 @@ public class MainActivity extends Activity  implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
 
         Variables.saveLearnTimeBoth();
+    }
+
+    public static void setDrawerSelected(int position)
+    {
+        mDrawerList.setItemChecked(position, true);
+        mDrawerList.setSelection(position);
     }
 
   /*  private void setCurrentColor(){
