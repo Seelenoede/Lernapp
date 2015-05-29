@@ -124,21 +124,19 @@ public class HomeFragment extends Fragment {
         }
     }
 
-<<<<<<< HEAD
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
 
         getActivity().getActionBar().setTitle("Home");
         MainActivity.setDrawerSelected(0);
-=======
+    }
+
     private void openText(File chosenFile)
     {
         Variables.chosenFile = chosenFile;
         Fragment fragment = new TextViewFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("tag").commit();
->>>>>>> master
     }
 }

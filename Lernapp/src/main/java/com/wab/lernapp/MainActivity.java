@@ -34,6 +34,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private int SETTINGS_REQUEST = 100;
     private int SETTINGS_COLOR_CHANGED = 101;
     private int SETTINGS_LEARNTYPE_CHANGED = 102;
+    public static int LEARNTIME_REQUEST = 200;
     public static final String KEY_PREF_SYNC_CONN = "pref_syncConnectionType";
 
 	@Override
@@ -134,7 +135,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
          int id = item.getItemId();
          if (id == R.id.action_settings) {
              Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-             startActivityForResult(intent,SETTINGS_REQUEST);
+             startActivityForResult(intent, SETTINGS_REQUEST);
              return true;
          }
          if (mDrawerToggle.onOptionsItemSelected(item)) {
@@ -263,10 +264,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 //Was auch immer passiert, wenn sich der Lerntyp ändert
             }
         }
+        else if(requestCode == LEARNTIME_REQUEST)
+        {
+            Variables.saveLearnTimeBoth();
+        }
     }
 
    private void setCurrentColor(){
-       ThemeUtils.changeToTheme(this,getThemeNumber());
+       ThemeUtils.changeToTheme(this, getThemeNumber());
    }
 
    public static void setDrawerSelected(int position)

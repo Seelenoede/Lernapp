@@ -92,7 +92,7 @@ public class FileHandler
         //If there is no app installed that can open PDF files an exception is thrown
         try
         {
-            activity.startActivityForResult(intent, 0);
+            activity.startActivityForResult(intent, MainActivity.LEARNTIME_REQUEST);
         }
         catch(ActivityNotFoundException e)
         {
@@ -118,7 +118,7 @@ public class FileHandler
 
         try
         {
-            baseActivity.startActivityForResult(intent, 0);
+            baseActivity.startActivityForResult(intent, MainActivity.LEARNTIME_REQUEST);
         }
         catch(ActivityNotFoundException e)
         {
@@ -148,7 +148,7 @@ public class FileHandler
 
         try
         {
-            baseActivity.startActivityForResult(intent, 0);
+            baseActivity.startActivityForResult(intent, MainActivity.LEARNTIME_REQUEST);
         }
         catch(ActivityNotFoundException e)
         {
