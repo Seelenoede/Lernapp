@@ -1,8 +1,9 @@
 package com.wab.lernapp;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
@@ -12,8 +13,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -90,12 +89,6 @@ public class FileHandler
         intent.setDataAndType(Uri.fromFile(src), "application/pdf");
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("HH");
-        Variables.startDateTmpH = Integer.parseInt(sdf.format(new Date()));
-        sdf = new SimpleDateFormat("mm:ss");
-        Variables.startDateTmp = sdf.format(new Date());
-        Variables.startTimeTmp = System.nanoTime();
-
         //If there is no app installed that can open PDF files an exception is thrown
         try
         {
@@ -106,6 +99,62 @@ public class FileHandler
             Toast toast = Toast.makeText(activity.getBaseContext(), "Keine App für PDF vorhanden", Toast.LENGTH_SHORT);
             toast.show();
             Log.e(TAG, "Keine App zum Anzeigen von PDFs vorhanden.");
+        }
+    }
+
+    /**
+     * Opens a video file
+     *
+     * @param src Input file
+     * @param baseActivity ö
+     */
+    public void openVideo(File src, Activity baseActivity)
+    {
+        Log.d(TAG, "Open Video");
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(src), "video/*");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+        try
+        {
+            baseActivity.startActivityForResult(intent, 0);
+        }
+        catch(ActivityNotFoundException e)
+        {
+            Toast toast = Toast.makeText(baseActivity.getBaseContext(), "Keine App für Videos vorhanden", Toast.LENGTH_SHORT);
+            toast.show();
+            Log.e(TAG, "Keine App zum Anzeigen von Videos vorhanden.");
+        }
+
+//        Fragment fragment = VideoFragment.newInstance(src);
+//
+//        FragmentManager fragmentManager = baseActivity.getFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    }
+
+    /**
+     * Opens audio files
+     * @param src Input file
+     * @param baseActivity base activity
+     */
+    public void openAudio(File src, Activity baseActivity)
+    {
+        Log.d(TAG, "Open Audio");
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(src), "audio/*");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+        try
+        {
+            baseActivity.startActivityForResult(intent, 0);
+        }
+        catch(ActivityNotFoundException e)
+        {
+            Toast toast = Toast.makeText(baseActivity.getBaseContext(), "Keine App für Audio vorhanden", Toast.LENGTH_SHORT);
+            toast.show();
+            Log.e(TAG, "Keine App zum Abspielen von Audiodateien vorhanden.");
         }
     }
 

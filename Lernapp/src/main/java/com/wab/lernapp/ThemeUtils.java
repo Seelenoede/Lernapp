@@ -59,6 +59,8 @@ public class ThemeUtils
 
     }
 
-
-
+    public static int getCurrentTheme()
+    {
+        return cTheme;
+    }
 }

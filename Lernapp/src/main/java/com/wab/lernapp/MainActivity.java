@@ -25,7 +25,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     static Activity activity;
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    private static ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -223,7 +223,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         if (fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("tag").commit();
 
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);
@@ -263,13 +263,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 //Was auch immer passiert, wenn sich der Lerntyp ändert
             }
         }
-
     }
 
    private void setCurrentColor(){
        ThemeUtils.changeToTheme(this,getThemeNumber());
    }
 
+   public static void setDrawerSelected(int position)
+    {
+        mDrawerList.setItemChecked(position, true);
+        mDrawerList.setSelection(position);
+    }
    /* protected void onSaveInstanceState(Bundle bundle)
     {
         super.onSaveInstanceState(bundle);

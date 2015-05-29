@@ -16,13 +16,13 @@ import android.widget.Toast;
 import java.io.File;
 
 /**
+ *
  * Created by Student on 14.04.2015.
  */
 public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
 
-    private ListView mItemList;
     FileHandler fileHandler;
 
     public HomeFragment() {
@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
 
         fileHandler = new FileHandler();
 
-        mItemList = (ListView) rootView.findViewById(R.id.fileList);
+        ListView mItemList = (ListView) rootView.findViewById(R.id.fileList);
 
         ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[fileHandler.allFiles.length];
 
@@ -92,6 +92,7 @@ public class HomeFragment extends Fragment {
         File chosenFile = fileHandler.allFiles[position];
         String mimeType = fileHandler.fileTypes.get(chosenFile);
         Context context = view.getContext();
+        Variables.setStartTimes();
         if(mimeType.equals("application/pdf"))
         {
             fileHandler.openPDF(chosenFile, this.getActivity());
@@ -111,17 +112,11 @@ public class HomeFragment extends Fragment {
                     break;
                 case "audio":
                     //Open Audio File
-                    text = "Noch keine Unterstützung für Audiofiles";
-                    duration = Toast.LENGTH_SHORT;
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    fileHandler.openAudio(chosenFile, this.getActivity());
                     break;
                 case "video":
                     //Open Video File
-                    text = "Noch keine Unterstützung für Videofiles";
-                    duration = Toast.LENGTH_SHORT;
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    fileHandler.openVideo(chosenFile, this.getActivity());
                     break;
                 default:
                     Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
@@ -129,11 +124,21 @@ public class HomeFragment extends Fragment {
         }
     }
 
+<<<<<<< HEAD
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        getActivity().getActionBar().setTitle("Home");
+        MainActivity.setDrawerSelected(0);
+=======
     private void openText(File chosenFile)
     {
         Variables.chosenFile = chosenFile;
         Fragment fragment = new TextViewFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("tag").commit();
+>>>>>>> master
     }
 }

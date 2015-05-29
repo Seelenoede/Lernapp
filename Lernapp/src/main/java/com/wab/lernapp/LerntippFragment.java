@@ -21,4 +21,13 @@ public class LerntippFragment extends Fragment {
 
         return rootView;
     }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        getActivity().getActionBar().setTitle("Lerntipps");
+        MainActivity.setDrawerSelected(3);
+    }
 }

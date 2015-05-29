@@ -35,4 +35,13 @@ public class AutomodusFragment extends Fragment{
         Variables.carTime += (delta/1e9);
         Variables.saveCarTime();
     }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        getActivity().getActionBar().setTitle("Automodus");
+        MainActivity.setDrawerSelected(1);
+    }
 }
