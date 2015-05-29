@@ -7,6 +7,6 @@
         android:title="@string/appearance"
         android:entries="@array/default_colors"
         android:entryValues="@array/default_colors"
-        android:defaultValue="@array/default_colors"
+        android:defaultValue="@string/default_style_value"
         />
 </PreferenceScreen>

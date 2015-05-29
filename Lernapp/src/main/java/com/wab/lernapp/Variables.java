@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.io.File;
+
 /**
  * Created by Student on 28.04.2015.
  *
@@ -31,6 +33,7 @@ public class Variables
     public static double averageGrade;
     public static double[] allGrades;
     public static int gradeCount;
+    public static File chosenFile;
 
     public static void loadVars(Context context)
     {

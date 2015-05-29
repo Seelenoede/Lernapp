@@ -5,10 +5,14 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,14 +20,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.zip.Inflater;
-import java.util.zip.InflaterOutputStream;
+public class MainActivity extends FragmentActivity implements View.OnClickListener{
 
-public class MainActivity extends Activity  implements View.OnClickListener {
-
-    Activity activity;
+    static Activity activity;
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -32,12 +31,24 @@ public class MainActivity extends Activity  implements View.OnClickListener {
     private CharSequence mTitle;
    // public static int currentColor;
     private Fragment fragment;
+    private int SETTINGS_REQUEST = 100;
+    private int SETTINGS_COLOR_CHANGED = 101;
+    private int SETTINGS_LEARNTYPE_CHANGED = 102;
+    public static final String KEY_PREF_SYNC_CONN = "pref_syncConnectionType";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-        ThemeUtils.onActivityCreateSetTheme(this);
+        if (savedInstanceState != null) {
+            return;
+        }
+        else
+        {
+            System.out.println("Es ist null");
+        }
+        System.out.println("in on create");
+        //setCurrentColor();
+        ThemeUtils.onActivityCreateSetTheme(this , getThemeNumber());
         activity = this;
 
         Variables.loadVars(activity.getApplicationContext());
@@ -87,24 +98,43 @@ public class MainActivity extends Activity  implements View.OnClickListener {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
-        findViewById(R.id.greenbutton).setOnClickListener(this);
-
-        findViewById(R.id.purplebutton).setOnClickListener(this);
+        //home-fragment als Startseite
+        fragment = new HomeFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.content_frame, fragment).commit();
+        setTitle("Home");
 	}
 
-	@Override
+    private int getThemeNumber() {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String strFarbe = SP.getString("preference_appearance","@string/default_style_value");
+        if (strFarbe.equals("Grün"))
+        {
+            return ThemeUtils.GREEN;
+        }
+        else if (strFarbe.equals("Lila"))
+        {
+            return ThemeUtils.PURPLE;
+        }
+        else
+        {
+            return ThemeUtils.PURPLE;
+        }
+    }
+
+    @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
-     public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
          // Handle presses on the action bar items
          int id = item.getItemId();
          if (id == R.id.action_settings) {
              Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-             startActivity(intent);
+             startActivityForResult(intent,SETTINGS_REQUEST);
              return true;
          }
          if (mDrawerToggle.onOptionsItemSelected(item)) {
@@ -121,7 +151,11 @@ public class MainActivity extends Activity  implements View.OnClickListener {
                  context = getApplicationContext();
                  text = "Suche wird nicht unterstützt!";
                  duration = Toast.LENGTH_SHORT;
-
+                 SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                 String strFarbe = SP.getString("preference_appearance","@string/default_style_value");
+                 toast = Toast.makeText(context, strFarbe, duration);
+                 toast.show();
+                 ThemeUtils.changeToTheme(this,ThemeUtils.PURPLE);
                  //currentColor = getResources().getColor(R.color.lightgreen);
                 // setCurrentColor();
                  return true;
@@ -141,10 +175,10 @@ public class MainActivity extends Activity  implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        /*switch (v.getId()){
             case R.id.greenbutton:
 
-                ThemeUtils.changeToTheme(this, ThemeUtils.GREEN);
+               ThemeUtils.changeToTheme(this, ThemeUtils.GREEN);
 
                 break;
 
@@ -153,7 +187,7 @@ public class MainActivity extends Activity  implements View.OnClickListener {
                 ThemeUtils.changeToTheme(this, ThemeUtils.PURPLE);
 
                 break;
-    }
+    }*/
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -215,66 +249,65 @@ public class MainActivity extends Activity  implements View.OnClickListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        System.out.println("In on activity result");
         super.onActivityResult(requestCode, resultCode, data);
+        //Wenn von Settings Result erwartet
+        if (requestCode == SETTINGS_REQUEST) {
 
-        long endTime = System.nanoTime();
-        long delta = endTime - Variables.startTimeTmp;
-        long timeLearned = 0;
-        timeLearned += delta/1e9;
-        Variables.learnTime += timeLearned;
-        Variables.saveLearnTime();
-
-        int startDateM = Integer.parseInt(Variables.startDateTmp.substring(0,2));
-        int startDateS = Integer.parseInt(Variables.startDateTmp.substring(3));
-        SimpleDateFormat sdf = new SimpleDateFormat("HH");
-        int endDateH = Integer.parseInt(sdf.format(new Date()));
-
-        /**
-         * Check if closed in different hour (e.g. starts 09:00 and ends 11:00)
-         */
-        if(endDateH == Variables.startDateTmpH)
-        {
-            Variables.learnTimes[endDateH] += timeLearned;
-            Variables.saveLearnTimes(endDateH);
-        }
-        else
-        {
-            long restM = timeLearned/60;
-            int timeDiff = 1;
-
-            Variables.learnTimes[Variables.startDateTmpH] += (60 - startDateM)*60 - startDateS;
-            Variables.saveLearnTimes(Variables.startDateTmpH);
-            restM = restM - 60 + startDateM;
-            timeLearned = timeLearned - (60-startDateM)*60 + startDateS;
-
-            while(restM != 0)
+            if (resultCode == SETTINGS_COLOR_CHANGED)
             {
-                if(restM >= 60)
-                {
-                    Variables.learnTimes[Variables.startDateTmpH + timeDiff] += 60*60;
-                    Variables.saveLearnTimes(Variables.startDateTmpH + timeDiff);
-                    restM = restM - 60;
-                    timeLearned = timeLearned - 3600;
-                    timeDiff++;
-                }
-                else
-                {
-                    timeLearned = timeLearned - restM*60;
-                    Variables.learnTimes[Variables.startDateTmpH + timeDiff] += restM*60 + timeLearned;
-                    Variables.saveLearnTimes(Variables.startDateTmpH + timeDiff);
-                    restM = 0;
-                }
+                setCurrentColor();
+            }
+            else if (resultCode == SETTINGS_LEARNTYPE_CHANGED)
+            {
+                //Was auch immer passiert, wenn sich der Lerntyp ändert
             }
         }
+
     }
 
-  /*  private void setCurrentColor(){
-        mDrawerList.setBackgroundColor(currentColor);
-        getActionBar().setBackgroundDrawable(new ColorDrawable(currentColor));
-        activity.findViewById(android.R.id.content).setBackgroundColor(currentColor);
-        if(fragment!=null)
-        {
-            fragment.getView().setBackgroundColor(currentColor);
-        }
+   private void setCurrentColor(){
+       ThemeUtils.changeToTheme(this,getThemeNumber());
+   }
+
+   /* protected void onSaveInstanceState(Bundle bundle)
+    {
+        super.onSaveInstanceState(bundle);
+        System.out.println("on save instance");
+    }
+
+    protected void onRestoreInstanceState(Bundle bundle)
+    {
+        super.onRestoreInstanceState(bundle);
+        System.out.println("on restore instance");
+    }
+    protected void onRestart()
+    {
+        super.onRestart();
+        System.out.println("on restart");
+    }
+    protected void onStart() {
+        super.onStart();
+        System.out.println("on start");
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("on resume");
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        System.out.println("on pause");
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        System.out.println("on stop");
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.out.println("on destroy");
     }*/
 }

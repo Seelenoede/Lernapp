@@ -1,7 +1,9 @@
 package com.wab.lernapp;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -105,10 +107,7 @@ public class HomeFragment extends Fragment {
             {
                 case "text":
                     //Open Text File
-                    text = "Noch keine Unterstützung für Textfiles";
-                    duration = Toast.LENGTH_SHORT;
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    openText(chosenFile);
                     break;
                 case "audio":
                     //Open Audio File
@@ -128,5 +127,13 @@ public class HomeFragment extends Fragment {
                     Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
             }
         }
+    }
+
+    private void openText(File chosenFile)
+    {
+        Variables.chosenFile = chosenFile;
+        Fragment fragment = new TextViewFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("tag").commit();
     }
 }
