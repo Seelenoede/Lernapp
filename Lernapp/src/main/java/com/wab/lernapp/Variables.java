@@ -7,6 +7,7 @@ import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.io.File;
 
 /**
  * Created by Student on 28.04.2015.
@@ -34,6 +35,7 @@ public class Variables
     public static double averageGrade;
     public static double[] allGrades;
     public static int gradeCount;
+    public static File chosenFile;
 
     public static void loadVars(Context context)
     {

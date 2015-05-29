@@ -17,6 +17,7 @@
     <item name="pink" type="color">#E91E63</item>
     <item name="darkpink" type="color">#AD1457</item>
     <item name="lightgreen" type="color">#90EE90</item>
+    <item name="black" type="color">#000000</item>
 
     <integer-array name="androidcolors">
         <item>@color/blue</item>

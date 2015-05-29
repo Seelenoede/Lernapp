@@ -4,24 +4,27 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
+    <style name="AppBaseTheme" parent="android:Theme.Material">
 
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
+    <style name="AppTheme" parent="PurpleTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-        <style name="PurpleTheme" parent="android:Theme.Material.Light">
-            <!-- Main theme colors -->
-            <!--   your app branding color for the app bar -->
-            <item name="android:colorPrimary">@color/purple</item>
-            <!--   darker variant for the status bar and contextual app bars -->
-            <!--   theme UI controls like checkboxes and text fields -->
-            <item name="android:colorAccent">@color/lightgelb</item>
-            <!--item name="android:windowBackground">@color/darkgreen</item-->
-        </style>
+    <style name="PurpleTheme" parent="android:Theme.Material.Light">
+        <!-- Main theme colors -->
+        <!--   your app branding color for the app bar -->
+        <item name="android:colorPrimary">@color/purple</item>
+        <item name="android:colorPrimaryDark">@color/black</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="android:colorAccent">@color/lightgelb</item>
+        <item name="android:colorButtonNormal">@color/lightgelb</item>
+
+        <!--item name="android:windowBackground">@color/darkgreen</item-->
+    </style>
 
     <style name="GreenTheme" parent="android:Theme.Material">
         <!-- Main theme colors -->

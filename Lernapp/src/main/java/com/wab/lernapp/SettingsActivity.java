@@ -1,9 +1,15 @@
 package com.wab.lernapp;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -11,14 +17,14 @@ import java.util.List;
  * Created by Alexander on 27.04.2015.
  */
 
-public class SettingsActivity extends PreferenceActivity {
-
-
+public class SettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     /**
      * For security it is necessary to check if a Fragment build inside of a Activity is valid (comes with API 19)
      * Just returning "true" works, but it's not the idea this method.
      */
+    private int COLOR_CHANGED = 101;
+    private int LEARNTYPE_CHANGED = 102;
     @Override
     protected boolean isValidFragment(String SettingsActivity$PrefsFragDidacticType) {
         /**
@@ -37,8 +43,9 @@ public class SettingsActivity extends PreferenceActivity {
     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.onActivityCreateSetTheme(this,getThemeNumber());
         super.onCreate(savedInstanceState);
-
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
     }
     /**
      * Populate the activity with the top-level headers.
@@ -48,6 +55,24 @@ public class SettingsActivity extends PreferenceActivity {
     @Override
     public void onBuildHeaders(List<Header> target) {
         loadHeadersFromResource(R.xml.preference_headers, target);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        int duration;
+        Context context;
+        Toast toast;
+        duration = Toast.LENGTH_SHORT;
+        context = getApplicationContext();
+        toast = Toast.makeText(context, key , duration);
+        toast.show();
+        Intent returnIntent = new Intent();
+        System.out.println("In preference changed");
+        if (key.equals("preference_appearance"))
+        {
+            setCurrentColor(sharedPreferences);
+            setResult(COLOR_CHANGED, returnIntent);
+        }
     }
 
     /**
@@ -96,10 +121,39 @@ public class SettingsActivity extends PreferenceActivity {
             super.onCreate(savedInstanceState);
 
             //Set default values
-            PreferenceManager.setDefaultValues(getActivity(), R.xml.preference_appearance, false);
+           // PreferenceManager.setDefaultValues(getActivity(), R.xml.preference_appearance, true);
 
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.preference_appearance);
+        }
+    }
+
+    //zum einstellen des Themes abhängig von der Einstellung
+    private void setCurrentColor(SharedPreferences SP) {
+
+        String strFarbe = SP.getString("preference_appearance", "@string/default_style_value");
+        if (strFarbe.equals("Grün")) {
+            ThemeUtils.changeToTheme(this, ThemeUtils.GREEN);
+        } else if (strFarbe.equals("Lila")) {
+            ThemeUtils.changeToTheme(this, ThemeUtils.PURPLE);
+        }
+        //TODO: restliche Farben hinzufügen
+    }
+
+    private int getThemeNumber() {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String strFarbe = SP.getString("preference_appearance","@string/default_style_value");
+        if (strFarbe.equals("Grün"))
+        {
+            return ThemeUtils.GREEN;
+        }
+        else if (strFarbe.equals("Lila"))
+        {
+            return ThemeUtils.PURPLE;
+        }
+        else
+        {
+            return ThemeUtils.PURPLE;
         }
     }
 }

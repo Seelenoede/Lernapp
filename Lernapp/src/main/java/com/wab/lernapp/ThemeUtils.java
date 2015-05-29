@@ -4,8 +4,8 @@ import android.app.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.util.TypedValue;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 
 public class ThemeUtils
@@ -35,10 +35,9 @@ public class ThemeUtils
 
     }
 
-    public static void onActivityCreateSetTheme(Activity activity)
+    public static void onActivityCreateSetTheme(Activity activity,int theme)
 
     {
-
         switch (cTheme)
 
         {
