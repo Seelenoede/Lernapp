@@ -224,7 +224,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         if (fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("tag").commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);
@@ -279,6 +279,24 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mDrawerList.setItemChecked(position, true);
         mDrawerList.setSelection(position);
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        if(mDrawerLayout.isDrawerOpen(mDrawerList))
+        {
+            mDrawerLayout.closeDrawer(mDrawerList);
+        }
+        else if(getFragmentManager().getBackStackEntryCount() > 0)
+        {
+            getFragmentManager().popBackStack();
+        }
+        else
+        {
+            super.onBackPressed();
+        }
+    }
+
    /* protected void onSaveInstanceState(Bundle bundle)
     {
         super.onSaveInstanceState(bundle);
@@ -307,7 +325,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onPause() {
         super.onPause();
-        System.out.println("on pause");
     }
     @Override
     protected void onStop() {

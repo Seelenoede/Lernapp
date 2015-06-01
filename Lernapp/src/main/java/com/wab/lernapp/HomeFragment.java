@@ -137,6 +137,6 @@ public class HomeFragment extends Fragment {
         Variables.chosenFile = chosenFile;
         Fragment fragment = new TextViewFragment();
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("tag").commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
     }
 }
