@@ -38,6 +38,7 @@ public class ThemeUtils
     public static void onActivityCreateSetTheme(Activity activity,int theme)
 
     {
+        cTheme = theme;
         switch (cTheme)
 
         {

@@ -19,14 +19,6 @@
         <item>Lerntipps</item>
     </string-array>
 
-    <string-array name="spinner_colors_item_array">
-        <item>Grün</item>
-        <item>Rosa</item>
-        <item>Gelb</item>
-        <item>Blau</item>
-    </string-array>
-
-
 <!--#########################-->
 <!-- Begin Preferences Values-->
 <!--#########################-->
@@ -43,9 +35,20 @@
     <string name="appearance">Aussehen ändern</string>
     <string-array name="default_colors">
         <item>Lila</item>
-        <item>Gelb</item>
         <item>Grün</item>
-        <item>Blau</item>
+    </string-array>
+    <string-array name="Lerntipps">
+        <item>Wer lernen muss lernt nicht, sag dir immer, dass du lernen willst!</item>
+        <item>Denk immer an das Resultat!</item>
+        <item>Stell dir einen Lernplan auf!</item>
+        <item>Trinke ausreichend. (Hauptsächlich Wasser)</item>
+        <item>Fang immer rechtzeitig an!</item>
+        <item>Fasse Texte, die du lesen musst, zusammen.</item>
+        <item>Mach alle 60 Minuten eine Pause von 3-5 Min.</item>
+        <item>Du solltest am letzten Tag vor der Prüfung nicht mehr neues lernen.</item>
+        <item>Schreibe dir einen kleinen Spickzettel, ABER nicht für die Klausur.</item>
+        <item>Gönne dir ausreichend Schlaf!</item>
+        <item>Belohne dich für geschaffte Aufgaben.</item>
     </string-array>
     <string name="default_style_value">Lila</string>
 

@@ -29,26 +29,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-   // public static int currentColor;
     private Fragment fragment;
     private int SETTINGS_REQUEST = 100;
     private int SETTINGS_COLOR_CHANGED = 101;
     private int SETTINGS_LEARNTYPE_CHANGED = 102;
     public static int LEARNTIME_REQUEST = 200;
-    public static final String KEY_PREF_SYNC_CONN = "pref_syncConnectionType";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            return;
-        }
-        else
-        {
-            System.out.println("Es ist null");
-        }
-        System.out.println("in on create");
-        //setCurrentColor();
         ThemeUtils.onActivityCreateSetTheme(this , getThemeNumber());
         activity = this;
 
@@ -250,14 +239,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        System.out.println("In on activity result");
         super.onActivityResult(requestCode, resultCode, data);
         //Wenn von Settings Result erwartet
-        if (requestCode == SETTINGS_REQUEST) {
 
+        if (requestCode == SETTINGS_REQUEST) {
+//TODO nochmal nach dem resultcode schauen
             if (resultCode == SETTINGS_COLOR_CHANGED)
             {
-                setCurrentColor();
+
             }
             else if (resultCode == SETTINGS_LEARNTYPE_CHANGED)
             {
@@ -270,6 +259,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
     }
 
+    //soll im MOment nicht mehr verwendet werden, da kein Neustart der App erzwungen werden soll
    private void setCurrentColor(){
        ThemeUtils.changeToTheme(this, getThemeNumber());
    }

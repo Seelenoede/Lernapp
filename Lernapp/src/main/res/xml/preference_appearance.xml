@@ -3,7 +3,7 @@
     <ListPreference
         android:dialogTitle="@string/appearance"
         android:key="preference_appearance"
-        android:summary=""
+        android:summary="Die Änderungen werden nach einem Neustart der App aktiv"
         android:title="@string/appearance"
         android:entries="@array/default_colors"
         android:entryValues="@array/default_colors"

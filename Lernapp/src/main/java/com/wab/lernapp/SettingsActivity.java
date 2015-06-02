@@ -59,19 +59,19 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        int duration;
+        /*int duration;
         Context context;
         Toast toast;
         duration = Toast.LENGTH_SHORT;
         context = getApplicationContext();
         toast = Toast.makeText(context, key , duration);
-        toast.show();
-        Intent returnIntent = new Intent();
-        System.out.println("In preference changed");
+        toast.show();*/
+        //Intent returnIntent = new Intent();
         if (key.equals("preference_appearance"))
         {
-            setCurrentColor(sharedPreferences);
-            setResult(COLOR_CHANGED, returnIntent);
+            //das ist wenn Theme gleich geändert werden soll
+            //setCurrentColor(sharedPreferences);
+            //setResult(COLOR_CHANGED, returnIntent);
         }
     }
 
@@ -128,7 +128,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         }
     }
 
-    //zum einstellen des Themes abhängig von der Einstellung
+    //zum einstellen des Themes abhängig von der Einstellung; wird im Mom nicht genutzt
     private void setCurrentColor(SharedPreferences SP) {
 
         String strFarbe = SP.getString("preference_appearance", "@string/default_style_value");

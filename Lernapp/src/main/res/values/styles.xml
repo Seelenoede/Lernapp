@@ -12,7 +12,6 @@
     <style name="AppTheme" parent="PurpleTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-
     <style name="PurpleTheme" parent="android:Theme.Material.Light">
         <!-- Main theme colors -->
         <!--   your app branding color for the app bar -->
