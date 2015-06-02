@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -24,23 +25,32 @@ public class FileHandler
 {
     private static final String TAG = "FileHandler";
 
-    public File[] allFiles;
+    public ArrayList<File[]> fileList;
     public HashMap<File, String> fileTypes;
 
     public FileHandler()
     {
         fileTypes = new HashMap<>();
-        allFiles = getAllFiles();
-        for(File file : allFiles)
+        fileList = new ArrayList<>();
+        fileList = getAllFiles();
+        for(File[] files : fileList)
         {
-            String type = getMimeType(file);
-            if(type != null)
+            for(File file : files)
             {
-                fileTypes.put(file, type);
-            }
-            else
-            {
-                Log.w(TAG, "Could not find MimeType of File: " + file.getName());
+                String type = getMimeType(file);
+                if (type != null)
+                {
+                    fileTypes.put(file, type);
+                }
+                else if (file.isDirectory())
+                {
+                    fileTypes.put(file, "folder/directory");
+                }
+                else
+                {
+                    Log.w(TAG, "Could not find MimeType of File: " + file.getName());
+                    fileTypes.put(file, "other/other");
+                }
             }
         }
     }
@@ -49,11 +59,12 @@ public class FileHandler
      * get all files that are stored in /sdcard/Lernapp/
      * @return files from /sdcard/Lernapp/
      */
-    private static File[] getAllFiles()
+    private static ArrayList<File[]> getAllFiles()
     {
         //auf S5 interner Speicher, bei Nexus 5 keine Ahnung
         File storage = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Lernapp");
         File[] allFiles = new File[0];
+        ArrayList<File[]> fileList = new ArrayList<>();
 
         if (!storage.exists())
         {
@@ -63,18 +74,35 @@ public class FileHandler
                 Log.d(TAG, "Directory Created");
                 allFiles = storage.listFiles();
                 Log.v(TAG, "read all Files");
+                fileList.add(allFiles);
+                for(File file : allFiles)
+                {
+                    if(file.isDirectory())
+                    {
+                        fileList.add(file.listFiles());
+                    }
+                }
             }
             else
             {
                 Log.e(TAG, "Could not create folder 'Lernapp'");
+                fileList.add(allFiles);
             }
         }
         else
         {
             allFiles = storage.listFiles();
             Log.v(TAG, "read all Files");
+            fileList.add(allFiles);
+            for(File file : allFiles)
+            {
+                if(file.isDirectory())
+                {
+                    fileList.add(file.listFiles());
+                }
+            }
         }
-        return allFiles;
+        return fileList;
     }
 
     /**
