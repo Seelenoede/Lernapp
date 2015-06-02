@@ -91,7 +91,6 @@ public class HomeFragment extends Fragment {
     {
         File chosenFile = fileHandler.allFiles[position];
         String mimeType = fileHandler.fileTypes.get(chosenFile);
-        Context context = view.getContext();
         Variables.setStartTimes();
         if(mimeType.equals("application/pdf"))
         {
@@ -100,10 +99,6 @@ public class HomeFragment extends Fragment {
         else
         {
             String shortType = mimeType.substring(0, mimeType.lastIndexOf('/'));
-            int duration;
-            String text;
-            Toast toast;
-
             switch(shortType)
             {
                 case "text":
@@ -138,5 +133,6 @@ public class HomeFragment extends Fragment {
         Fragment fragment = new TextViewFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+        getActivity().getActionBar().setTitle(chosenFile.getName());
     }
 }

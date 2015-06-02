@@ -57,11 +57,8 @@ public class TextViewFragment extends Fragment {
         ScrollView scrollView_content = (ScrollView) rootView.findViewById(R.id.scrollView_content);
         TextView tv_content = (TextView)scrollView_content.findViewById(R.id.textView_content);
 
-        HorizontalScrollView scrollView_heading = (HorizontalScrollView) rootView.findViewById(R.id.horizontalScrollView_heading);
-        TextView tv_heading = (TextView) scrollView_heading.findViewById(R.id.textView_heading);
 
 //Set the text
         tv_content.setText(text);
-        tv_heading.setText(chosenFile.getName());
     }
 }
