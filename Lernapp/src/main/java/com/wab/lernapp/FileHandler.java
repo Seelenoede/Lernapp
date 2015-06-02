@@ -74,7 +74,23 @@ public class FileHandler
                 Log.d(TAG, "Directory Created");
                 allFiles = storage.listFiles();
                 Log.v(TAG, "read all Files");
-                fileList.add(allFiles);
+
+                int count = 0;
+                ArrayList<File> directories = new ArrayList<>();
+                for(File file : allFiles)
+                {
+                    if (file.isDirectory())
+                        directories.add(file);
+                    else
+                        count++;
+                }
+                File[] tmpfiles = new File[directories.size()];
+                for(int i=0; i<directories.size();i++)
+                {
+                    tmpfiles[i] = directories.get(i);
+                }
+                fileList.add(tmpfiles);
+
                 for(File file : allFiles)
                 {
                     if(file.isDirectory())
@@ -82,6 +98,15 @@ public class FileHandler
                         fileList.add(file.listFiles());
                     }
                 }
+
+                File[] otherFiles = new File[count];
+                count = 0;
+                for(File file : allFiles) {
+                    if (!file.isDirectory()) {
+                        otherFiles[count] = file;
+                    }
+                }
+                fileList.add(otherFiles);
             }
             else
             {
@@ -93,7 +118,23 @@ public class FileHandler
         {
             allFiles = storage.listFiles();
             Log.v(TAG, "read all Files");
-            fileList.add(allFiles);
+            //The following is to ensure that no directories are in fileList
+            int count = 0;
+            ArrayList<File> directories = new ArrayList<>();
+            for(File file : allFiles)
+            {
+                if (file.isDirectory())
+                    directories.add(file);
+                else
+                    count++;
+            }
+            File[] tmpfiles = new File[directories.size()];
+            for(int i=0; i<directories.size();i++)
+            {
+                tmpfiles[i] = directories.get(i);
+            }
+            fileList.add(tmpfiles);
+            
             for(File file : allFiles)
             {
                 if(file.isDirectory())
@@ -101,6 +142,15 @@ public class FileHandler
                     fileList.add(file.listFiles());
                 }
             }
+
+            File[] otherFiles = new File[count];
+            count = 0;
+            for(File file : allFiles) {
+                if (!file.isDirectory()) {
+                    otherFiles[count] = file;
+                }
+            }
+            fileList.add(otherFiles);
         }
         return fileList;
     }

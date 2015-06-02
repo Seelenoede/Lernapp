@@ -43,46 +43,43 @@ public class HomeFragment extends Fragment {
 
         for(File file : fileHandler.fileList.get(0))
         {
-            if(file.isDirectory())
+            items.add(new SectionItemHome(file.getName()));
+            for(File file1 : fileHandler.fileList.get(count))
             {
-                items.add(new SectionItemHome(file.getName()));
-                for(File file1 : fileHandler.fileList.get(count))
-                {
-                    String mimeType = fileHandler.fileTypes.get(file1);
+                String mimeType = fileHandler.fileTypes.get(file1);
 
-                    if(mimeType.equals("application/pdf"))
+                if(mimeType.equals("application/pdf"))
+                {
+                    items.add(new EntryItemHome(file1.getName(), R.drawable.ic_pdf));
+                }
+                else
+                {
+                    String shortType = mimeType.substring(0, mimeType.lastIndexOf('/'));
+                    switch(shortType)
                     {
-                        items.add(new EntryItemHome(file1.getName(), R.drawable.ic_pdf));
-                    }
-                    else
-                    {
-                        String shortType = mimeType.substring(0, mimeType.lastIndexOf('/'));
-                        switch(shortType)
-                        {
-                            case "text":
-                                items.add(new EntryItemHome(file1.getName(), R.drawable.ic_text));
-                                break;
-                            case "audio":
-                                items.add(new EntryItemHome(file1.getName(), R.drawable.ic_audio));
-                                break;
-                            case "video":
-                                items.add(new EntryItemHome(file1.getName(), R.drawable.ic_video));
-                                break;
-                            case "folder":
-                                break;
-                            default:
-                                Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
-                                items.add(new EntryItemHome(file1.getName(), 0));
-                        }
+                        case "text":
+                            items.add(new EntryItemHome(file1.getName(), R.drawable.ic_text));
+                            break;
+                        case "audio":
+                            items.add(new EntryItemHome(file1.getName(), R.drawable.ic_audio));
+                            break;
+                        case "video":
+                            items.add(new EntryItemHome(file1.getName(), R.drawable.ic_video));
+                            break;
+                        case "folder":
+                            break;
+                        default:
+                            Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
+                            items.add(new EntryItemHome(file1.getName(), 0));
                     }
                 }
-                count++;
             }
+            count++;
         }
 
         items.add(new SectionItemHome("Sonstiges"));
 
-        for(File file : fileHandler.fileList.get(0))
+        for(File file : fileHandler.fileList.get(fileHandler.fileList.size()-1))
         {
             String mimeType = fileHandler.fileTypes.get(file);
 
@@ -131,13 +128,13 @@ public class HomeFragment extends Fragment {
 
     private void selectItem(int position, View view)
     {
-        int count = 0;
-        while(position > fileHandler.fileList.get(count).length-1)
+        int count = 1;
+        while(position > fileHandler.fileList.get(count).length)
         {
-            position-=fileHandler.fileList.get(count).length;
+            position = position - fileHandler.fileList.get(count).length - 1;
             count++;
         }
-        File chosenFile = fileHandler.fileList.get(count)[position];
+        File chosenFile = fileHandler.fileList.get(count)[position-1];
 
         String mimeType = fileHandler.fileTypes.get(chosenFile);
         Variables.setStartTimes();
@@ -164,9 +161,7 @@ public class HomeFragment extends Fragment {
                     break;
                 default:
                     Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
-                    text = "Kann Datei nicht oeffnen";
-                    duration = Toast.LENGTH_SHORT;
-                    toast = Toast.makeText(context, text, duration);
+                    Toast toast = Toast.makeText(view.getContext(), "Kann Datei nicht oeffnen", Toast.LENGTH_SHORT);
                     toast.show();
             }
         }
