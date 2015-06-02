@@ -3,7 +3,6 @@ package com.wab.lernapp;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,18 +37,58 @@ public class HomeFragment extends Fragment {
         fileHandler = new FileHandler();
 
         ListView mItemList = (ListView) rootView.findViewById(R.id.fileList);
+        ArrayList<ItemHome> items = new ArrayList<>();
 
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[fileHandler.allFiles.length];
+        int count = 1;
 
-        int count = 0;
+        for(File file : fileHandler.fileList.get(0))
+        {
+            if(file.isDirectory())
+            {
+                items.add(new SectionItemHome(file.getName()));
+                for(File file1 : fileHandler.fileList.get(count))
+                {
+                    String mimeType = fileHandler.fileTypes.get(file1);
 
-        for(File file : fileHandler.allFiles)
+                    if(mimeType.equals("application/pdf"))
+                    {
+                        items.add(new EntryItemHome(file1.getName(), R.drawable.ic_pdf));
+                    }
+                    else
+                    {
+                        String shortType = mimeType.substring(0, mimeType.lastIndexOf('/'));
+                        switch(shortType)
+                        {
+                            case "text":
+                                items.add(new EntryItemHome(file1.getName(), R.drawable.ic_text));
+                                break;
+                            case "audio":
+                                items.add(new EntryItemHome(file1.getName(), R.drawable.ic_audio));
+                                break;
+                            case "video":
+                                items.add(new EntryItemHome(file1.getName(), R.drawable.ic_video));
+                                break;
+                            case "folder":
+                                break;
+                            default:
+                                Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
+                                items.add(new EntryItemHome(file1.getName(), 0));
+                        }
+                    }
+                }
+                count++;
+            }
+        }
+
+        items.add(new SectionItemHome("Sonstiges"));
+
+        for(File file : fileHandler.fileList.get(0))
         {
             String mimeType = fileHandler.fileTypes.get(file);
 
             if(mimeType.equals("application/pdf"))
             {
-                drawerItem[count] = new ObjectDrawerItem(R.drawable.ic_pdf, file.getName());
+                items.add(new EntryItemHome(file.getName(), R.drawable.ic_pdf));
             }
             else
             {
@@ -56,22 +96,24 @@ public class HomeFragment extends Fragment {
                 switch(shortType)
                 {
                     case "text":
-                        drawerItem[count] = new ObjectDrawerItem(R.drawable.ic_text, file.getName());
+                        items.add(new EntryItemHome(file.getName(), R.drawable.ic_text));
                         break;
                     case "audio":
-                        drawerItem[count] = new ObjectDrawerItem(R.drawable.ic_audio, file.getName());
+                        items.add(new EntryItemHome(file.getName(), R.drawable.ic_audio));
                         break;
                     case "video":
-                        drawerItem[count] = new ObjectDrawerItem(R.drawable.ic_video, file.getName());
+                        items.add(new EntryItemHome(file.getName(), R.drawable.ic_video));
+                        break;
+                    case "folder":
                         break;
                     default:
                         Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
+                        items.add(new EntryItemHome(file.getName(), 0));
                 }
             }
-            count++;
         }
 
-        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(rootView.getContext(), R.layout.listview_item_row, drawerItem);
+        EntryAdapterHome adapter = new EntryAdapterHome(rootView.getContext(), items);
         mItemList.setAdapter(adapter);
         mItemList.setOnItemClickListener(new ListFileItemClickListener());
 
@@ -89,7 +131,14 @@ public class HomeFragment extends Fragment {
 
     private void selectItem(int position, View view)
     {
-        File chosenFile = fileHandler.allFiles[position];
+        int count = 0;
+        while(position > fileHandler.fileList.get(count).length-1)
+        {
+            position-=fileHandler.fileList.get(count).length;
+            count++;
+        }
+        File chosenFile = fileHandler.fileList.get(count)[position];
+
         String mimeType = fileHandler.fileTypes.get(chosenFile);
         Context context = view.getContext();
         Variables.setStartTimes();
@@ -120,6 +169,10 @@ public class HomeFragment extends Fragment {
                     break;
                 default:
                     Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
+                    text = "Kann Datei nicht oeffnen";
+                    duration = Toast.LENGTH_SHORT;
+                    toast = Toast.makeText(context, text, duration);
+                    toast.show();
             }
         }
     }
