@@ -128,6 +128,19 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         }
     }
 
+    /**
+     * This Fragment shows the preferences for the impressum header.
+     * Loading preferences fragment to edit Appearance settings
+     * "Bundle savedInstanceState" see first OnCreate method in this activity
+     */
+    public static class PrefsFragImpressum extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.preference_impressum);
+        }
+    }
+
     //zum einstellen des Themes abhängig von der Einstellung; wird im Mom nicht genutzt
     private void setCurrentColor(SharedPreferences SP) {
 

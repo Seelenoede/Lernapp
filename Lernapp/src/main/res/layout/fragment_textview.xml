@@ -28,7 +28,7 @@
             android:autoText="true"
             android:typeface="sans"
             android:textSize="15dp"
-            android:textIsSelectable="true" />
+            />
 
     </ScrollView>
 

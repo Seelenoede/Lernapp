@@ -33,8 +33,9 @@ public class FileHandler
         fileTypes = new HashMap<>();
         fileList = new ArrayList<>();
         fileList = getAllFiles();
-        for(File[] files : fileList)
+        for(int i=1; i<fileList.size();i++)
         {
+            File[] files = fileList.get(i);
             for(File file : files)
             {
                 String type = getMimeType(file);
@@ -148,6 +149,7 @@ public class FileHandler
             for(File file : allFiles) {
                 if (!file.isDirectory()) {
                     otherFiles[count] = file;
+                    count++;
                 }
             }
             fileList.add(otherFiles);

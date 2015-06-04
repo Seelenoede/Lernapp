@@ -181,6 +181,6 @@ public class HomeFragment extends Fragment {
         Fragment fragment = new TextViewFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-        getActivity().getActionBar().setTitle(chosenFile.getName());
+        getActivity().setTitle(chosenFile.getName());
     }
 }

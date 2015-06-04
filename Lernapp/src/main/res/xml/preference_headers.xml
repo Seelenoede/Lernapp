@@ -25,9 +25,16 @@
         </intent>
     </header>
 
-    <header android:icon="@drawable/ic_einstellungen"
+    <header android:fragment="com.wab.lernapp.SettingsActivity$PrefsFragImpressum"
+        android:icon="@drawable/ic_einstellungen"
         android:title="Impressum"
         android:summary="Wer hat's erfunden?">
+    </header>
+
+    <header
+        android:icon="@drawable/ic_einstellungen"
+        android:title="App Version"
+        android:summary="Lernapp WAB3 HfTL 1.0.0">
     </header>
 
 
