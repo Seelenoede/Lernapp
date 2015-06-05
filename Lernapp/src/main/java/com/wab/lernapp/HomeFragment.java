@@ -149,7 +149,7 @@ public class HomeFragment extends Fragment {
             {
                 case "text":
                     //Open Text File
-                    openText(chosenFile);
+                    fileHandler.openText(chosenFile, this.getActivity());
                     break;
                 case "audio":
                     //Open Audio File
@@ -173,14 +173,5 @@ public class HomeFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("Home");
         MainActivity.setDrawerSelected(0);
-    }
-
-    private void openText(File chosenFile)
-    {
-        Variables.chosenFile = chosenFile;
-        Fragment fragment = new TextViewFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-        getActivity().setTitle(chosenFile.getName());
     }
 }

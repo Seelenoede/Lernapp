@@ -61,4 +61,11 @@ public class TextViewFragment extends Fragment {
 //Set the text
         tv_content.setText(text);
     }
+
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        Variables.saveLearnTimeBoth();
+    }
 }
