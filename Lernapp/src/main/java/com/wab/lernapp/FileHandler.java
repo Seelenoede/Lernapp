@@ -4,11 +4,15 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -236,6 +240,15 @@ public class FileHandler
             toast.show();
             Log.e(TAG, "Keine App zum Abspielen von Audiodateien vorhanden.");
         }
+    }
+
+    public void openText(File chosenFile, Activity activity)
+    {
+        Variables.chosenFile = chosenFile;
+        Fragment fragment = new TextViewFragment();
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+        activity.setTitle(chosenFile.getName());
     }
 
     /**
