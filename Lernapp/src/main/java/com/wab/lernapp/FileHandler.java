@@ -226,7 +226,7 @@ public class FileHandler
     {
         Log.d(TAG, "Open Audio");
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
+        /*Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(src), "audio/*");
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
@@ -239,7 +239,12 @@ public class FileHandler
             Toast toast = Toast.makeText(baseActivity.getBaseContext(), "Keine App für Audio vorhanden", Toast.LENGTH_SHORT);
             toast.show();
             Log.e(TAG, "Keine App zum Abspielen von Audiodateien vorhanden.");
-        }
+        }*/
+
+        Fragment fragment = AudioFragment.newInstance(src);
+
+        FragmentManager fragmentManager = baseActivity.getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
     }
 
     public void openText(File chosenFile, Activity activity)

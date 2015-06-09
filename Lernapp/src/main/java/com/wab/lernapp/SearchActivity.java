@@ -32,10 +32,10 @@ public class SearchActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.onActivityCreateSetTheme(this, getThemeNumber());
         setContentView(R.layout.activity_search);
         resultFiles = new ArrayList<>();
         Log.d(TAG, "Search Activity created");
-        ThemeUtils.onActivityCreateSetTheme(this , getThemeNumber());
 
         activity = this;
         // Get the intent, verify the action and get the query
