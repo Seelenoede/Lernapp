@@ -9,30 +9,31 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="PurpleTheme">
+    <style name="AppTheme" parent="YellowTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    <style name="PurpleTheme" parent="android:Theme.Material.Light">
-        <!-- Main theme colors -->
-        <!--   your app branding color for the app bar -->
-        <item name="android:colorPrimary">@color/purple</item>
-        <item name="android:colorPrimaryDark">@color/black</item>
-        <!--   darker variant for the status bar and contextual app bars -->
-        <!--   theme UI controls like checkboxes and text fields -->
-        <item name="android:colorAccent">@color/lightgelb</item>
-        <item name="android:colorButtonNormal">@color/lightgelb</item>
 
-        <!--item name="android:windowBackground">@color/darkgreen</item-->
+    <style name="OrangeTheme" parent="android:Theme.Material.Light">
+
+        <item name="android:colorPrimary">@color/orangePrimary</item>
+        <item name="android:colorAccent">@color/orangeAccent</item>
+        <item name="android:colorPrimaryDark">@color/orangeBar</item>
+
     </style>
 
-    <style name="GreenTheme" parent="android:Theme.Material">
-        <!-- Main theme colors -->
-        <!--   your app branding color for the app bar -->
-        <item name="android:colorPrimary">@color/darkgreen</item>
-        <!--   darker variant for the status bar and contextual app bars -->
-        <!--item name="android:colorPrimaryDark">@color/orange</item-->
-        <!--   theme UI controls like checkboxes and text fields -->
-        <item name="android:colorAccent">@color/pink</item>
+    <style name="YellowTheme" parent="android:Theme.Material.Light">
+
+        <item name="android:colorPrimary">@color/yellowPrimary</item>
+        <item name="android:colorAccent">@color/yellowAccent</item>
+        <item name="android:colorPrimaryDark">@color/yellowBar</item>
+
+    </style>
+
+    <style name="GreenTheme" parent="android:Theme.Material.Light">
+
+        <item name="android:colorPrimary">@color/greenPrimary</item>
+        <item name="android:colorAccent">@color/greenAccent</item>
+        <item name="android:colorPrimaryDark">@color/greenBar</item>
 
     </style>
 

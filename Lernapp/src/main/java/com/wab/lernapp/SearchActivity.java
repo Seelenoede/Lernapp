@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ public class SearchActivity extends FragmentActivity {
         setContentView(R.layout.activity_search);
         resultFiles = new ArrayList<>();
         Log.d(TAG, "Search Activity created");
+        ThemeUtils.onActivityCreateSetTheme(this , getThemeNumber());
 
         activity = this;
         // Get the intent, verify the action and get the query
@@ -66,6 +69,27 @@ public class SearchActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private int getThemeNumber() {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String strFarbe = SP.getString("preference_appearance","@string/default_style_value");
+        if (strFarbe.equals("Grün"))
+        {
+            return ThemeUtils.GREEN;
+        }
+        else if (strFarbe.equals("Orange"))
+        {
+            return ThemeUtils.ORANGE;
+        }
+        else if (strFarbe.equals("Gelb"))
+        {
+            return ThemeUtils.YELLOW;
+        }
+        else
+        {
+            return ThemeUtils.YELLOW;
+        }
+    }
+    
     private void searchFile(String query, ListView baseView)
     {
         ArrayList<ItemHome> items = new ArrayList<>();

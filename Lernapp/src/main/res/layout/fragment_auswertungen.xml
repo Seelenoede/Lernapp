@@ -11,23 +11,11 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/txtLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text="Auswertungen"
-            android:textSize="16dp"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Gelernte Zeit:"
             android:id="@+id/labelLearnTime"
-            android:layout_below="@+id/txtLabel"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"/>
 
@@ -37,7 +25,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Wie lange gelernt"
             android:id="@+id/textLernzeit"
-            android:layout_below="@+id/txtLabel"
             android:layout_alignParentEnd="true"
             android:layout_toRightOf="@+id/labelLearnTime"/>
 

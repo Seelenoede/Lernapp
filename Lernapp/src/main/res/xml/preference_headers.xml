@@ -16,11 +16,11 @@
     <!-- TODO: Hilfe und Impressum evtl. wo anders unterbringen?-->
 <!-- Es folgen Beispiele, laut design-Richtlinie gehören Hilfe und Impressum nicht in die Einstellungen, weil es nict einzustellen gibt-->
     <header android:icon="@drawable/ic_einstellungen"
-        android:title="Help"
+        android:title="Hilfe"
         android:summary="Probleme?">
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="mailto:alexander.lelonek@gmail.com?subject=this is a test subject">
+            android:data="mailto:alexander.lelonek@gmail.com?subject=Lernapp WAB3 - Hilfe benötigt">
             <!--<extra android:name="android.intent.extra.TEXT" android:value="This is a test" />-->
         </intent>
     </header>

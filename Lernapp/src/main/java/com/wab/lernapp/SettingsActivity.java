@@ -145,12 +145,18 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     private void setCurrentColor(SharedPreferences SP) {
 
         String strFarbe = SP.getString("preference_appearance", "@string/default_style_value");
-        if (strFarbe.equals("Grün")) {
+        if (strFarbe.equals("Grün"))
+        {
             ThemeUtils.changeToTheme(this, ThemeUtils.GREEN);
-        } else if (strFarbe.equals("Lila")) {
-            ThemeUtils.changeToTheme(this, ThemeUtils.PURPLE);
         }
-        //TODO: restliche Farben hinzufügen
+        else if (strFarbe.equals("Orange"))
+        {
+            ThemeUtils.changeToTheme(this, ThemeUtils.ORANGE);
+        }
+        else if (strFarbe.equals("Yellow"))
+        {
+            ThemeUtils.changeToTheme(this, ThemeUtils.YELLOW);
+        }
     }
 
     private int getThemeNumber() {
@@ -160,13 +166,17 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         {
             return ThemeUtils.GREEN;
         }
-        else if (strFarbe.equals("Lila"))
+        else if (strFarbe.equals("Orange"))
         {
-            return ThemeUtils.PURPLE;
+            return ThemeUtils.ORANGE;
+        }
+        else if (strFarbe.equals("Gelb"))
+        {
+            return ThemeUtils.YELLOW;
         }
         else
         {
-            return ThemeUtils.PURPLE;
+            return ThemeUtils.YELLOW;
         }
     }
 }

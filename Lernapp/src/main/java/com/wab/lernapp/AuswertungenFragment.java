@@ -114,10 +114,13 @@ public class AuswertungenFragment extends Fragment {
         switch(ThemeUtils.getCurrentTheme())
         {
             case ThemeUtils.GREEN:
-                series.setColor(getResources().getColor(R.color.pink));
+                series.setColor(getResources().getColor(R.color.greenAccent));
                 break;
-            case ThemeUtils.PURPLE:
-                series.setColor(getResources().getColor(R.color.lightgelb));
+            case ThemeUtils.ORANGE:
+                series.setColor(getResources().getColor(R.color.orangeAccent));
+                break;
+            case ThemeUtils.YELLOW:
+                series.setColor(getResources().getColor(R.color.yellowAccent));
                 break;
             default:
                 series.setColor(getResources().getColor(R.color.darkred));
@@ -187,10 +190,13 @@ public class AuswertungenFragment extends Fragment {
         switch(ThemeUtils.getCurrentTheme())
         {
             case ThemeUtils.GREEN:
-                series.setColor(getResources().getColor(R.color.pink));
+                series.setColor(getResources().getColor(R.color.greenAccent));
                 break;
-            case ThemeUtils.PURPLE:
-                series.setColor(getResources().getColor(R.color.lightgelb));
+            case ThemeUtils.ORANGE:
+                series.setColor(getResources().getColor(R.color.orangeAccent));
+                break;
+            case ThemeUtils.YELLOW:
+                series.setColor(getResources().getColor(R.color.yellowAccent));
                 break;
             default:
                 series.setColor(getResources().getColor(R.color.darkred));

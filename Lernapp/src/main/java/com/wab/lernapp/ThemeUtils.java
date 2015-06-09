@@ -18,7 +18,9 @@ public class ThemeUtils
 
     public final static int GREEN = 1;
 
-    public final static int PURPLE = 0;
+    public final static int YELLOW = 0;
+
+    public final static int ORANGE = 2;
 
     public static void changeToTheme(Activity activity, int theme)
 
@@ -44,15 +46,20 @@ public class ThemeUtils
         {
 
             default:
-            case PURPLE:
+            case YELLOW:
 
-                activity.setTheme(R.style.PurpleTheme);
+                activity.setTheme(R.style.YellowTheme);
 
                 break;
 
             case GREEN:
 
                 activity.setTheme(R.style.GreenTheme);
+
+                break;
+            case ORANGE:
+
+                activity.setTheme(R.style.OrangeTheme);
 
                 break;
 

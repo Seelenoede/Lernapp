@@ -3,6 +3,7 @@ package com.wab.lernapp;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -41,6 +42,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("on create");
 		super.onCreate(savedInstanceState);
         ThemeUtils.onActivityCreateSetTheme(this , getThemeNumber());
         activity = this;
@@ -92,7 +94,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
-        //home-fragment als Startseite
+        // home-fragment als Startseite
         fragment = new HomeFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().add(R.id.content_frame, fragment).commit();
@@ -106,13 +108,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         {
             return ThemeUtils.GREEN;
         }
-        else if (strFarbe.equals("Lila"))
+        else if (strFarbe.equals("Orange"))
         {
-            return ThemeUtils.PURPLE;
+            return ThemeUtils.ORANGE;
+        }
+        else if (strFarbe.equals("Gelb"))
+        {
+            return ThemeUtils.YELLOW;
         }
         else
         {
-            return ThemeUtils.PURPLE;
+            return ThemeUtils.YELLOW;
         }
     }
 
@@ -152,7 +158,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
          Toast toast;
 
          switch (id) {
-             //case R.id.action_search:
+             case R.id.action_search:
                  /*context = getApplicationContext();
                  text = "Suche wird nicht unterstützt!";
                  duration = Toast.LENGTH_SHORT;
@@ -160,10 +166,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                  String strFarbe = SP.getString("preference_appearance","@string/default_style_value");
                  toast = Toast.makeText(context, strFarbe, duration);
                  toast.show();
-                 ThemeUtils.changeToTheme(this, ThemeUtils.PURPLE);*/
+                // ThemeUtils.changeToTheme(this, ThemeUtils.PURPLE);
 
                  //currentColor = getResources().getColor(R.color.lightgreen);
-                // setCurrentColor();
+                 setCurrentColor();*/
                  //return true;
              case R.id.action_filter:
                  context = getApplicationContext();
@@ -181,19 +187,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        /*switch (v.getId()){
-            case R.id.greenbutton:
-
-               ThemeUtils.changeToTheme(this, ThemeUtils.GREEN);
-
-                break;
-
-            case R.id.purplebutton:
-
-                ThemeUtils.changeToTheme(this, ThemeUtils.PURPLE);
-
-                break;
-    }*/
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -303,7 +296,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
     }
 
-   /* protected void onSaveInstanceState(Bundle bundle)
+    protected void onSaveInstanceState(Bundle bundle)
     {
         super.onSaveInstanceState(bundle);
         System.out.println("on save instance");
@@ -311,7 +304,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     protected void onRestoreInstanceState(Bundle bundle)
     {
+        getFragmentManager().beginTransaction().remove(fragment).commit();
         super.onRestoreInstanceState(bundle);
+
         System.out.println("on restore instance");
     }
     protected void onRestart()
@@ -341,5 +336,5 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onDestroy() {
         super.onDestroy();
         System.out.println("on destroy");
-    }*/
+    }
 }

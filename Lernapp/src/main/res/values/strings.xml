@@ -34,7 +34,8 @@
 <!--Preferences for appearance-->
     <string name="appearance">Aussehen ändern</string>
     <string-array name="default_colors">
-        <item>Lila</item>
+        <item>Gelb</item>
+        <item>Orange</item>
         <item>Grün</item>
     </string-array>
     <string-array name="Lerntipps">
@@ -49,8 +50,19 @@
         <item>Schreibe dir einen kleinen Spickzettel, ABER nicht für die Klausur.</item>
         <item>Gönne dir ausreichend Schlaf!</item>
         <item>Belohne dich für geschaffte Aufgaben.</item>
+
+        <item>Kaugummi Kauen kann die Kontzentration steigern.</item>
+        <item>Stehe auf und bewege dich, um den Kopf frei zu bekommen.</item>
+        <item>Denk immer an das Ziel!</item>
+        <item>Guck in deinen Pausen auf keinen Bildschirm sondern ...</item>
+        <item>... lehn dich zurück, schließ die Augen und denk an etwas anderes.</item>
+        <item>Sport hilft den Kopf frei zu bekommen.</item>
+        <item>Eine ausgewogene Ernährung kann beim Konzentrieren helfen.</item>
+        <item>Nimm dir ruhig einen Tag in der Woche, an dem du nichts lernst.</item>
+        <item>Erst kommt die Arbeit, dann das Vergnügen!</item>
+        <item>Wer beim Lernen Kaugummi kaut, sollte das auch in der Klausur machen.</item>
     </string-array>
-    <string name="default_style_value">Lila</string>
+    <string name="default_style_value">Gelb</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
