@@ -256,6 +256,14 @@ public class FileHandler
         activity.setTitle(chosenFile.getName());
     }
 
+    public void openDirectory(int srcDir, Activity activity)
+    {
+        Fragment fragment = FileViewerFragment.newInstance(srcDir);
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+        activity.setTitle(fileList.get(0)[srcDir].getName());
+    }
+
     /**
      * Get Mime Type from file
      * @param file Input File

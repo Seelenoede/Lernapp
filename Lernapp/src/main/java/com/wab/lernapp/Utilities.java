@@ -1,12 +1,6 @@
 package com.wab.lernapp;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
+import java.io.File;
 
 /**
  *
@@ -77,5 +71,45 @@ public class Utilities {
 
         // return current duration in milliseconds
         return currentDuration * 1000;
+    }
+
+    public File[] removeDirectories(File[] inFiles)
+    {
+        int count = 0;
+        for(File file : inFiles)
+        {
+            if (!file.isDirectory())
+                count++;
+        }
+        File[] outFiles = new File[count];
+
+        count=0;
+        for(File file : inFiles)
+        {
+            if (!file.isDirectory())
+                outFiles[count] = file;
+        }
+
+        return outFiles;
+    }
+
+    public File[] removeFiles(File[] inFiles)
+    {
+        int count = 0;
+        for(File file : inFiles)
+        {
+            if (file.isDirectory())
+                count++;
+        }
+        File[] outFiles = new File[count];
+
+        count=0;
+        for(File file : inFiles)
+        {
+            if (file.isDirectory())
+                outFiles[count] = file;
+        }
+
+        return outFiles;
     }
 }
