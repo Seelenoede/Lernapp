@@ -64,14 +64,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:elevation="8dp"
             android:id="@+id/audioButton"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:src="@android:drawable/ic_media_pause"
+            android:src="@drawable/ic_audio_pause"
             android:clickable="true"
             android:minHeight="128dp"
-            android:minWidth="128dp" />
-        <!--android:background="?android:attr/colorPrimary"-->
+            android:minWidth="128dp"
+            android:background="@drawable/oval"/>
     </RelativeLayout>
 </RelativeLayout>

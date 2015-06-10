@@ -75,9 +75,8 @@ public class AudioFragment extends Fragment implements MediaPlayer.OnCompletionL
         audioButton.setOnClickListener(new AudioButtonClickListener());
 
         startAudio();
-        //audioButton.setImageResource(R.drawable.ic_audio_pause);
 
-        audioButton.setImageResource(android.R.drawable.ic_media_pause);
+        audioButton.setImageResource(R.drawable.ic_audio_pause);
         updateProgressBar();
 
         return rootView;
@@ -106,7 +105,7 @@ public class AudioFragment extends Fragment implements MediaPlayer.OnCompletionL
     @Override
     public void onCompletion(MediaPlayer mediaPlayer) {
         play_mode = 0;
-        audioButton.setImageResource(android.R.drawable.ic_media_play);
+        audioButton.setImageResource(R.drawable.ic_audio_play);
         //audioButton.setImageResource(R.drawable.ic_audio_play);
     }
 
@@ -119,14 +118,14 @@ public class AudioFragment extends Fragment implements MediaPlayer.OnCompletionL
                 case 0:
                     mediaPlayer.start();
                     play_mode = 1;
-                    audioButton.setImageResource(android.R.drawable.ic_media_pause);
+                    audioButton.setImageResource(R.drawable.ic_audio_pause);
                     //audioButton.setImageResource(R.drawable.ic_audio_pause);
                     updateProgressBar();
                     break;
                 case 1:
                     mediaPlayer.pause();
                     play_mode=0;
-                    audioButton.setImageResource(android.R.drawable.ic_media_play);
+                    audioButton.setImageResource(R.drawable.ic_audio_play);
                     //audioButton.setImageResource(R.drawable.ic_audio_play);
                     break;
                 default:
