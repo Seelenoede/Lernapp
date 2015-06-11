@@ -20,4 +20,6 @@ public class SectionItemHome implements ItemHome {
         return true;
     }
 
+    @Override
+    public boolean isCarItem() {return false;}
 }

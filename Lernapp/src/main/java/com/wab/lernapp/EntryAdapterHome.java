@@ -41,7 +41,22 @@ public class EntryAdapterHome extends ArrayAdapter<ItemHome> {
                 final TextView sectionView = (TextView) v.findViewById(R.id.list_item_section_text);
                 sectionView.setText(si.getTitle());
 
-            }else{
+            }
+            else if (i.isCarItem())
+            {
+                CarItem ci = (CarItem) i;
+                v = vi.inflate(R.layout.list_item_car, null);
+
+                final ImageView drawable = (ImageView)v.findViewById(R.id.list_item_car_drawable);
+                final TextView title = (TextView)v.findViewById(R.id.list_item_car_name);
+
+                if(title != null)
+                    title.setText(ci.title);
+                if(drawable != null)
+                    drawable.setImageResource(ci.icon);
+            }
+            else
+            {
                 EntryItemHome ei = (EntryItemHome)i;
                 v = vi.inflate(R.layout.list_item_entry, null);
                 final ImageView drawable = (ImageView)v.findViewById(R.id.list_item_entry_drawable);

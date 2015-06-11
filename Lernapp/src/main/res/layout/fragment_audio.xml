@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.wab.lernapp.AudioFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/audioBar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/audioTitle"
+            android:textSize="40sp"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/audioBar"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp" />
+    <LinearLayout
+        android:id="@+id/timerDisplay"
+        android:layout_above="@id/audioBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp">
+        <!-- Current Duration Label -->
+        <TextView
+            android:id="@+id/songCurrentDurationLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textStyle="bold"/>
+        <!-- Total Duration Label -->
+        <TextView
+            android:id="@+id/songTotalDurationLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/audioBar">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            android:id="@+id/audioButton"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_audio_pause"
+            android:clickable="true"
+            android:minHeight="128dp"
+            android:minWidth="128dp"
+            android:background="@drawable/oval"/>
+    </RelativeLayout>
+</RelativeLayout>
