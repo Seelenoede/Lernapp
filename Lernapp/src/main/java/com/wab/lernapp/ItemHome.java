@@ -6,5 +6,5 @@ package com.wab.lernapp;
 public interface ItemHome {
 
     public boolean isSection();
-
+    public boolean isCarItem();
 }

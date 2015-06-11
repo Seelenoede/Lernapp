@@ -51,7 +51,7 @@ public class AutomodusFragment extends Fragment{
                 if(shortType.equals("audio"))
                 {
                     resultFiles.add(file);
-                    items.add(new EntryItemHome(file.getName(), R.drawable.ic_audio));
+                    items.add(new CarItem(file.getName(), R.drawable.ic_audio));
                 }
             }
         }

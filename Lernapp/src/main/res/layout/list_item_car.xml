@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:minHeight="100dp"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/list_item_car_drawable"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="10dp"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/list_item_car_name"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="?android:attr/textColorSecondary"
+        android:layout_toRightOf="@+id/list_item_car_drawable"
+        android:text="Entry Name"
+        android:textSize="32sp"
+        android:layout_centerVertical="true" />
+
+</RelativeLayout>
