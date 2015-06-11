@@ -38,10 +38,12 @@ public class SearchActivity extends FragmentActivity {
         Log.d(TAG, "Search Activity created");
 
         activity = this;
+
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
+            getActionBar().setTitle("Suche '" + query + "'");
             searchFile(query.toLowerCase(), (ListView) findViewById(R.id.search_result));
         }
 
@@ -189,6 +191,10 @@ public class SearchActivity extends FragmentActivity {
         //Wenn von Settings Result erwartet
 
         if(requestCode == MainActivity.LEARNTIME_REQUEST)
+        {
+            Variables.saveLearnTimeBoth();
+        }
+        else if(requestCode == MainActivity.LEARNTIME_REQUEST)
         {
             Variables.saveLearnTimeBoth();
         }

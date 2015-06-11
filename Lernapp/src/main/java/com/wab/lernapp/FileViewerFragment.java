@@ -45,6 +45,15 @@ public class FileViewerFragment extends Fragment {
         fileHandler = HomeFragment.fileHandler;
         int inputDir = getArguments().getInt("srcDir");
 
+        if(inputDir == fileHandler.fileList.size()-2)
+        {
+            getActivity().setTitle("Anderes");
+        }
+        else
+        {
+            getActivity().setTitle(fileHandler.fileList.get(0)[inputDir].getName());
+        }
+
         for(File file : fileHandler.fileList.get(inputDir+1))
         {
             String mimeType = fileHandler.fileTypes.get(file);

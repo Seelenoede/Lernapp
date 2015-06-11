@@ -23,6 +23,7 @@ public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
 
+
     //TODO: Load directory if needed
     public static FileHandler fileHandler;
 
@@ -114,6 +115,10 @@ public class HomeFragment extends Fragment {
         {
             items.add(new EntryItemHome(file.getName(), R.drawable.ic_folder));
         }
+        if(fileHandler.fileList.get(fileHandler.fileList.size()-1).length > 0)
+        {
+            items.add(new EntryItemHome("Anderes", R.drawable.ic_folder));
+        }
 
         EntryAdapterHome adapter = new EntryAdapterHome(rootView.getContext(), items);
         mItemList.setAdapter(adapter);
@@ -126,12 +131,12 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position, view);
+            selectItem(position);
         }
 
     }
 
-    private void selectItem(int position, View view)
+    private void selectItem(int position)
     {
         /*int count = 1;
         while(position > fileHandler.fileList.get(count).length)
