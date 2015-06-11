@@ -35,15 +35,15 @@
     <!--hier kommen die Farben für die anpassbaren Themes-->
 
     <item name="orangePrimary" type="color">#FF9800</item>
-    <item name="orangeAccent" type="color">#AA00FF</item>
+    <item name="orangeAccent" type="color">#7986CB</item>
     <item name="orangeBar" type="color">#EF6C00</item>
 
-    <item name="yellowPrimary" type="color">#FFEB3B</item>
-    <item name="yellowAccent" type="color">#AA00FF</item>
+    <item name="yellowPrimary" type="color">#FDD835</item>
+    <item name="yellowAccent" type="color">#AB47BC</item>
     <item name="yellowBar" type="color">#F9A825</item>
 
     <item name="greenPrimary" type="color">#8BC34A</item>
-    <item name="greenAccent" type="color">#AA00FF</item>
+    <item name="greenAccent" type="color">#F06292</item>
     <item name="greenBar" type="color">#558B2F</item>
 
 
