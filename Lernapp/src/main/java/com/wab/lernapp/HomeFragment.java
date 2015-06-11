@@ -23,7 +23,9 @@ public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
 
-    FileHandler fileHandler;
+
+    //TODO: Load directory if needed
+    public static FileHandler fileHandler;
 
     public HomeFragment() {
     }
@@ -39,7 +41,7 @@ public class HomeFragment extends Fragment {
         ListView mItemList = (ListView) rootView.findViewById(R.id.fileList);
         ArrayList<ItemHome> items = new ArrayList<>();
 
-        int count = 1;
+        /*int count = 1;
 
         for(File file : fileHandler.fileList.get(0))
         {
@@ -108,6 +110,14 @@ public class HomeFragment extends Fragment {
                         items.add(new EntryItemHome(file.getName(), 0));
                 }
             }
+        }*/
+        for(File file : fileHandler.fileList.get(0))
+        {
+            items.add(new EntryItemHome(file.getName(), R.drawable.ic_folder));
+        }
+        if(fileHandler.fileList.get(fileHandler.fileList.size()-1).length > 0)
+        {
+            items.add(new EntryItemHome("Anderes", R.drawable.ic_folder));
         }
 
         EntryAdapterHome adapter = new EntryAdapterHome(rootView.getContext(), items);
@@ -121,14 +131,14 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position, view);
+            selectItem(position);
         }
 
     }
 
-    private void selectItem(int position, View view)
+    private void selectItem(int position)
     {
-        int count = 1;
+        /*int count = 1;
         while(position > fileHandler.fileList.get(count).length)
         {
             position = position - fileHandler.fileList.get(count).length - 1;
@@ -164,7 +174,8 @@ public class HomeFragment extends Fragment {
                     Toast toast = Toast.makeText(view.getContext(), "Kann Datei nicht oeffnen", Toast.LENGTH_SHORT);
                     toast.show();
             }
-        }
+        }*/
+        fileHandler.openDirectory(position, this.getActivity());
     }
 
     @Override

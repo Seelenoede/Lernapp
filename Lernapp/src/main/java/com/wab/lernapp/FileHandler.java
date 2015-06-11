@@ -4,15 +4,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
-import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -190,7 +186,7 @@ public class FileHandler
      * Opens a video file
      *
      * @param src Input file
-     * @param baseActivity ö
+     * @param baseActivity parent activity
      */
     public void openVideo(File src, Activity baseActivity)
     {
@@ -226,20 +222,10 @@ public class FileHandler
     {
         Log.d(TAG, "Open Audio");
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(src), "audio/*");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        Fragment fragment = AudioFragment.newInstance(src);
 
-        try
-        {
-            baseActivity.startActivityForResult(intent, MainActivity.LEARNTIME_REQUEST);
-        }
-        catch(ActivityNotFoundException e)
-        {
-            Toast toast = Toast.makeText(baseActivity.getBaseContext(), "Keine App für Audio vorhanden", Toast.LENGTH_SHORT);
-            toast.show();
-            Log.e(TAG, "Keine App zum Abspielen von Audiodateien vorhanden.");
-        }
+        FragmentManager fragmentManager = baseActivity.getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
     }
 
     public void openText(File chosenFile, Activity activity)
@@ -249,6 +235,13 @@ public class FileHandler
         FragmentManager fragmentManager = activity.getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
         activity.setTitle(chosenFile.getName());
+    }
+
+    public void openDirectory(int srcDir, Activity activity)
+    {
+        Fragment fragment = FileViewerFragment.newInstance(srcDir);
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
     }
 
     /**
