@@ -1,6 +1,7 @@
 package com.wab.lernapp;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Intent;
@@ -28,6 +29,7 @@ public class SearchActivity extends FragmentActivity {
     FileHandler fileHandler;
     Activity activity;
     ArrayList<File> resultFiles;
+    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,9 @@ public class SearchActivity extends FragmentActivity {
             getActionBar().setTitle("Suche '" + query + "'");
             searchFile(query.toLowerCase(), (ListView) findViewById(R.id.search_result));
         }
+        fragment = new HomeFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.content_frame, fragment).commit();
 
     }
 

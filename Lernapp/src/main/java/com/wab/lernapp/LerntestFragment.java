@@ -7,14 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.List;
 
 /**
  * Created by Student on 14.04.2015.
  */
-public class LerntippFragment extends Fragment {
+public class LerntestFragment extends Fragment {
 
-    public LerntippFragment() {
+    public LerntestFragment() {
     }
 
     private RecyclerView mRecyclerView;
@@ -23,13 +24,13 @@ public class LerntippFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        List<Tipp> tipps = Tipp.initializeData(getActivity());
-        View rootView = inflater.inflate(R.layout.fragment_lerntipps, container, false);
-        RecyclerView rv = (RecyclerView)rootView.findViewById(R.id.rv);
-        rv.setHasFixedSize(true);
+        List<Test> test = Test.initializeData(getActivity());
+        View rootView = inflater.inflate(R.layout.fragment_lerntest, container, false);
+        RecyclerView rv = (RecyclerView)rootView.findViewById(R.id.content_rv);
+        rv.setHasFixedSize(false);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
-        RVAdapter adapter = new RVAdapter(tipps);
+        RVAdapter_test adapter = new RVAdapter_test(test);
         rv.setAdapter(adapter);
         return rootView;
     }
@@ -39,7 +40,7 @@ public class LerntippFragment extends Fragment {
     {
         super.onResume();
 
-        getActivity().getActionBar().setTitle("Lerntipps");
+        getActivity().getActionBar().setTitle("Lerntest");
         MainActivity.setDrawerSelected(3);
     }
 

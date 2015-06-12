@@ -92,6 +92,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.preference_lerntyp);
+
         }
     }
 

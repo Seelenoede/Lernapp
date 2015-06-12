@@ -3,19 +3,19 @@
        xmlns:android="http://schemas.android.com/apk/res/android">
 
     <header android:fragment="com.wab.lernapp.SettingsActivity$PrefsFragDidacticType"
-        android:icon="@drawable/ic_einstellungen"
+        android:icon="@drawable/ic_lerntyp"
         android:title="Lerntyp"
         android:summary="Alle Einstellungen zum Lerntyp"
     />
 
     <header android:fragment="com.wab.lernapp.SettingsActivity$PrefsFragAppearance"
-        android:icon="@drawable/ic_einstellungen"
+        android:icon="@drawable/ic_rolle"
         android:title="Aussehen"
         android:summary="Aussehen der App anpassen"
     />
     <!-- TODO: Hilfe und Impressum evtl. wo anders unterbringen?-->
 <!-- Es folgen Beispiele, laut design-Richtlinie gehören Hilfe und Impressum nicht in die Einstellungen, weil es nict einzustellen gibt-->
-    <header android:icon="@drawable/ic_einstellungen"
+    <header android:icon="@drawable/ic_fragezeichen"
         android:title="Hilfe"
         android:summary="Probleme?">
         <intent
@@ -26,13 +26,13 @@
     </header>
 
     <header android:fragment="com.wab.lernapp.SettingsActivity$PrefsFragImpressum"
-        android:icon="@drawable/ic_einstellungen"
+        android:icon="@drawable/ic_info"
         android:title="Impressum"
         android:summary="Wer hat's erfunden?">
     </header>
 
     <header
-        android:icon="@drawable/ic_einstellungen"
+        android:icon="@drawable/ic_handy"
         android:title="App Version"
         android:summary="Lernapp WAB3 HfTL 1.0.0">
     </header>

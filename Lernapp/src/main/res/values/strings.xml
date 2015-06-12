@@ -38,6 +38,8 @@
         <item>Orange</item>
         <item>Grün</item>
     </string-array>
+
+    <!--Array für die Lerntipps-->
     <string-array name="Lerntipps">
         <item>Wer lernen muss, lernt nicht. Sag dir immer, dass du lernen willst!</item>
         <item>Denk immer an das Resultat, dann hast du ein Ziel vor Augen!</item>
@@ -50,7 +52,6 @@
         <item>Schreibe dir einen kleinen Spickzettel, ABER nicht für die Klausur.</item>
         <item>Gönne dir ausreichend Schlaf!</item>
         <item>Belohne dich für geschaffte Aufgaben.</item>
-
         <item>Kaugummi Kauen kann die Kontzentration steigern.</item>
         <item>Stehe auf und bewege dich, um den Kopf frei zu bekommen.</item>
         <item>Denk immer an das Ziel!</item>
@@ -62,11 +63,38 @@
         <item>Erst kommt die Arbeit, dann das Vergnügen!</item>
         <item>Wer beim Lernen Kaugummi kaut, sollte das auch in der Klausur machen.</item>
     </string-array>
+
+    <!--Array für die Lerntest-Fragen-->
+    <string-array name="Fragen">
+        <item>Wer lernen muss, lernt nicht. Sag dir immer, dass du lernen willst!</item>
+        <item>Denk immer an das Resultat, dann hast du ein Ziel vor Augen!</item>
+        <item>Stell dir einen Lernplan auf, um nicht den Überblick zu verlieren!</item>
+        <item>Trinke ausreichend. Am besten ist Wasser!</item>
+        <item>Fang immer rechtzeitig an, um Stress zu vermeiden!</item>
+        <item>Fasse Texte, die du lesen musst, zusammen.</item>
+        <item>Mach alle 60 Minuten eine Pause von 3-5 Min.</item>
+        <item>Du solltest am letzten Tag vor der Prüfung nichts neues mehr lernen.</item>
+        <item>Schreibe dir einen kleinen Spickzettel, ABER nicht für die Klausur.</item>
+        <item>Gönne dir ausreichend Schlaf!</item>
+        <item>Belohne dich für geschaffte Aufgaben.</item>
+        <item>Kaugummi Kauen kann die Kontzentration steigern.</item>
+        <item>Stehe auf und bewege dich, um den Kopf frei zu bekommen.</item>
+        <item>Denk immer an das Ziel!</item>
+        <item>Guck in deinen Pausen auf keinen Bildschirm sondern ...</item>
+        <item>... lehn dich zurück, schließ die Augen und denk an etwas anderes.</item>
+        <item>Sport hilft den Kopf frei zu bekommen.</item>
+        <item>Eine ausgewogene Ernährung kann beim Konzentrieren helfen.</item>
+        <item>Nimm dir ruhig einen Tag in der Woche, an dem du nichts lernst.</item>
+        <item>Erst kommt die Arbeit, dann das Vergnügen!</item>
+        <item>Wer beim Lernen Kaugummi kaut, sollte das auch in der Klausur machen.</item>
+    </string-array>
+
     <string name="default_style_value">Gelb</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_test">Lerntypentest</string>
     <string name="app_label">Lernapp</string>
     <string name="search_hint">Nach Datei suchen</string>
 
