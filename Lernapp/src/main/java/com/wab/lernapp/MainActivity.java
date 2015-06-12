@@ -158,19 +158,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
          Toast toast;
 
          switch (id) {
-             case R.id.action_search:
-                 /*context = getApplicationContext();
-                 text = "Suche wird nicht unterstützt!";
-                 duration = Toast.LENGTH_SHORT;
-                 SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                 String strFarbe = SP.getString("preference_appearance","@string/default_style_value");
-                 toast = Toast.makeText(context, strFarbe, duration);
-                 toast.show();
-                // ThemeUtils.changeToTheme(this, ThemeUtils.PURPLE);
-
-                 //currentColor = getResources().getColor(R.color.lightgreen);
-                 setCurrentColor();*/
-                 //return true;
              case R.id.action_filter:
                  context = getApplicationContext();
                  text = "Filtern kommt noch!";
