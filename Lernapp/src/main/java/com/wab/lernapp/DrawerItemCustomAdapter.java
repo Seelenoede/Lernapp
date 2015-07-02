@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
+ *
  * Created by Student on 14.04.2015.
  */
 public class DrawerItemCustomAdapter extends ArrayAdapter<ObjectDrawerItem> {
@@ -29,7 +30,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<ObjectDrawerItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View listItem = convertView;
+        View listItem;
 
         LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
         listItem = inflater.inflate(layoutResourceId, parent, false);

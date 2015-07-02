@@ -3,9 +3,7 @@ package com.wab.lernapp;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.SearchManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +13,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,9 +32,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private Fragment fragment;
+    private MenuItem menuItem;
     private int SETTINGS_REQUEST = 100;
     private int SETTINGS_COLOR_CHANGED = 101;
-    private int SETTINGS_LEARNTYPE_CHANGED = 102;
     public static int LEARNTIME_REQUEST = 200;
 
 	@Override
@@ -75,7 +72,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 R.string.drawer_open,
                 R.string.drawer_close
         ) {
-
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
@@ -130,7 +126,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         //SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        MenuItem menuItem = menu.findItem(R.id.action_search);
+        menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
@@ -239,14 +235,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         //Wenn von Settings Result erwartet
 
         if (requestCode == SETTINGS_REQUEST) {
-//TODO nochmal nach dem resultcode schauen
+        //TODO nochmal nach dem resultcode schauen
             if (resultCode == SETTINGS_COLOR_CHANGED)
             {
 
-            }
-            else if (resultCode == SETTINGS_LEARNTYPE_CHANGED)
-            {
-                //Was auch immer passiert, wenn sich der Lerntyp ändert
             }
         }
         else if(requestCode == LEARNTIME_REQUEST)
@@ -286,42 +278,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onSaveInstanceState(Bundle bundle)
     {
         super.onSaveInstanceState(bundle);
-        System.out.println("on save instance");
     }
 
     protected void onRestoreInstanceState(Bundle bundle)
     {
         getFragmentManager().beginTransaction().remove(fragment).commit();
         super.onRestoreInstanceState(bundle);
+    }
 
-        System.out.println("on restore instance");
-    }
-    protected void onRestart()
-    {
-        super.onRestart();
-        System.out.println("on restart");
-    }
-    protected void onStart() {
-        super.onStart();
-        System.out.println("on start");
-    }
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("on resume");
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        System.out.println("on stop");
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        System.out.println("on destroy");
+        if(menuItem != null)
+        {
+            menuItem.collapseActionView();
+        }
     }
 }

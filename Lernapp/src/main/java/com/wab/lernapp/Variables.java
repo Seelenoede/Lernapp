@@ -6,8 +6,10 @@ import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
 import java.io.File;
+import java.util.Set;
 
 /**
  * Created by Student on 28.04.2015.
@@ -25,6 +27,7 @@ public class Variables
     private static String startDate;
 
     private static SharedPreferences mPrefs;
+    private static SharedPreferences mPrefsSetting;
 
     /**
      * All vars that can be used everywhere
@@ -36,18 +39,24 @@ public class Variables
     public static double[] allGrades;
     public static int gradeCount;
     public static File chosenFile;
+    public static boolean[] filterOptions;
 
     public static void loadVars(Context context)
     {
         Log.d(TAG, "Load Variables");
         mPrefs = context.getSharedPreferences("Vars", 0);
+        mPrefsSetting = context.getSharedPreferences("com.wab.lernapp_preferences", 0);
 
         learnTimes = new long[24];
         carTime = mPrefs.getLong("carTime", 0);
         learnTime = mPrefs.getLong("learnTime", 0);
+
         averageGrade = Double.parseDouble(mPrefs.getString("averageGrade", "0.0"));
         gradeCount = mPrefs.getInt("gradeCount", 0);
         allGrades = new double[gradeCount];
+
+        filterOptions = new boolean[2];
+        loadDidacticType();
 
         if(gradeCount!=0)
         {
@@ -69,6 +78,16 @@ public class Variables
         {
             allGrades[i] = Double.parseDouble(mPrefs.getString("allGrades" + i, "0.0"));
         }
+    }
+
+    public static void loadDidacticType()
+    {
+        HashSet<String> defaultTypes = new HashSet<>();
+        defaultTypes.add("auditiv");
+        defaultTypes.add("visuell");
+        Set<String> didacticTypes = mPrefsSetting.getStringSet("preference_didactic_type",defaultTypes);
+        filterOptions[0] = didacticTypes.contains("visuell");
+        filterOptions[1] = didacticTypes.contains("auditiv");
     }
 
     /**
@@ -113,6 +132,19 @@ public class Variables
         reloadGrades();
     }
 
+    public static void saveDidacticType()
+    {
+        HashSet<String> didacticTypes = new HashSet<>();
+
+        if(filterOptions[0])
+            didacticTypes.add("visuell");
+        if(filterOptions[1])
+            didacticTypes.add("auditiv");
+
+        SharedPreferences.Editor mEditor = mPrefsSetting.edit();
+        mEditor.putStringSet("preference_didactic_type", didacticTypes).commit();
+    }
+
     /**
      * delete all grades
      *
@@ -123,10 +155,10 @@ public class Variables
         SharedPreferences.Editor mEditor = mPrefs.edit();
         for(int i=0; i<gradeCount; i++)
         {
-            mEditor.putString("allGrades" + i, "0.0");
+            mEditor.putString("allGrades" + i, "0.0").commit();
         }
 
-        mEditor.putInt("gradeCount", gradeCount);
+        mEditor.putInt("gradeCount", gradeCount).commit();
     }
 
     /**

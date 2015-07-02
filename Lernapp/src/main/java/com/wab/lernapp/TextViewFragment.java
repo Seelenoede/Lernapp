@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -15,12 +14,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
+ *
  * Created by Student on 14.04.2015.
  */
 public class TextViewFragment extends Fragment {
 
     private View rootView;
-    private String filePath;
 
     public TextViewFragment() {
     }

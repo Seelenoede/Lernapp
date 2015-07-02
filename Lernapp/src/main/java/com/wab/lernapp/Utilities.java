@@ -73,6 +73,7 @@ public class Utilities {
         return currentDuration * 1000;
     }
 
+    //remove directories from file array
     public File[] removeDirectories(File[] inFiles)
     {
         int count = 0;
@@ -93,6 +94,7 @@ public class Utilities {
         return outFiles;
     }
 
+    //remove non-directories from file array
     public File[] removeFiles(File[] inFiles)
     {
         int count = 0;

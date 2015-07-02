@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Created by Student on 01.06.2015.
  */
 public class Tipp {

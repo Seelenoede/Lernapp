@@ -28,7 +28,6 @@
     <string-array name="default_didactic_types">
         <item>visuell</item>
         <item>auditiv</item>
-        <item>Mischtyp</item>
     </string-array>
     <string name="didactic_type_test">Lerntyp-Test starten</string>
 <!--Preferences for appearance-->

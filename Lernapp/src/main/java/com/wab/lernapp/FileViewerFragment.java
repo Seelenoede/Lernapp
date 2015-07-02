@@ -22,6 +22,7 @@ public class FileViewerFragment extends Fragment {
 
     FileHandler fileHandler;
     private final String TAG = "FileViewerFragment";
+    private ArrayList<File> fileList;
 
     public FileViewerFragment() {
         // Required empty public constructor
@@ -40,6 +41,7 @@ public class FileViewerFragment extends Fragment {
     {
         View rootView = inflater.inflate(R.layout.fragment_file_viewer, container, false);
 
+        fileList = new ArrayList<>();
         ListView mItemList = (ListView) rootView.findViewById(R.id.fileViewerList);
         ArrayList<ItemHome> items = new ArrayList<>();
         fileHandler = HomeFragment.fileHandler;
@@ -60,7 +62,10 @@ public class FileViewerFragment extends Fragment {
 
             if (mimeType.equals("application/pdf"))
             {
+                if(!Variables.filterOptions[0])
+                    continue;
                 items.add(new EntryItemHome(file.getName(), R.drawable.ic_pdf));
+                fileList.add(file);
             }
             else
             {
@@ -68,19 +73,29 @@ public class FileViewerFragment extends Fragment {
                 switch (shortType)
                 {
                     case "text":
-                        items.add(new EntryItemHome(file.getName(), R.drawable.ic_text));
+                        if(Variables.filterOptions[0])
+                        {
+                            items.add(new EntryItemHome(file.getName(), R.drawable.ic_text));
+                            fileList.add(file);
+                        }
                         break;
                     case "audio":
-                        items.add(new EntryItemHome(file.getName(), R.drawable.ic_audio));
+                        if(Variables.filterOptions[1])
+                        {
+                            items.add(new EntryItemHome(file.getName(), R.drawable.ic_audio));
+                            fileList.add(file);
+                        }
                         break;
                     case "video":
                         items.add(new EntryItemHome(file.getName(), R.drawable.ic_video));
+                        fileList.add(file);
                         break;
                     case "folder":
                         break;
                     default:
                         Log.w(TAG, "Could not associate MIME-Type: " + mimeType);
                         items.add(new EntryItemHome(file.getName(), 0));
+                        fileList.add(file);
                 }
             }
         }
@@ -101,9 +116,9 @@ public class FileViewerFragment extends Fragment {
 
     private void selectItem(int position, View view)
     {
-        int srcDir = getArguments().getInt("srcDir");
+        //int srcDir = getArguments().getInt("srcDir");
 
-        File chosenFile = fileHandler.fileList.get(srcDir +1)[position];
+        File chosenFile = fileList.get(position);
 
         String mimeType = fileHandler.fileTypes.get(chosenFile);
         Variables.setStartTimes();

@@ -19,6 +19,7 @@ import java.io.IOException;
  * A fragment that contains a surface view to show videos
  *
  * TODO: give media player controls
+ * class is not used
  *
  * @author pmeyerbu
  */

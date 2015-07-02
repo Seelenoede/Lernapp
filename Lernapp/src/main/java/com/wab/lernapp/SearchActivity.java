@@ -95,4 +95,15 @@ public class SearchActivity extends FragmentActivity {
             Variables.saveLearnTimeBoth();
         }
     }
+
+    protected void onSaveInstanceState(Bundle bundle)
+    {
+        super.onSaveInstanceState(bundle);
+    }
+
+    protected void onRestoreInstanceState(Bundle bundle)
+    {
+        getFragmentManager().beginTransaction().remove(fragment).commit();
+        super.onRestoreInstanceState(bundle);
+    }
 }

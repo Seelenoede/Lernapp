@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
+ *
  * Created by Student on 01.06.2015.
  */
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TippViewHolder>{
@@ -18,8 +19,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TippViewHolder>{
     @Override
     public TippViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_lerntipps, viewGroup, false);
-        TippViewHolder pvh = new TippViewHolder(v);
-        return pvh;
+        return new TippViewHolder(v);
     }
 
     @Override

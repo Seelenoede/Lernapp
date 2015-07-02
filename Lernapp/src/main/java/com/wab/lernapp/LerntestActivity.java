@@ -23,22 +23,22 @@ import com.wab.lernapp.wizard.ui.PageFragmentCallbacks;
 import com.wab.lernapp.wizard.ui.ReviewFragment;
 import com.wab.lernapp.wizard.ui.StepPagerStrip;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LerntestActivity extends FragmentActivity implements
@@ -60,10 +60,13 @@ public class LerntestActivity extends FragmentActivity implements
     private List<Page> mCurrentPageSequence;
     private StepPagerStrip mStepPagerStrip;
 
+    private Activity activity;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThemeUtils.onActivityCreateSetTheme(this , getThemeNumber());
+        ThemeUtils.onActivityCreateSetTheme(this, getThemeNumber());
         setContentView(R.layout.activity_test);
+        activity = this;
 
         if (savedInstanceState != null) {
             mWizardModel.load(savedInstanceState.getBundle("model"));
@@ -107,11 +110,71 @@ public class LerntestActivity extends FragmentActivity implements
             @Override
             public void onClick(View view) {
                 if (mPager.getCurrentItem() == mCurrentPageSequence.size()) {
-                    //TODO: hier muss hin, was passiert wenn Test fertig ist
-                } else {
+                    ArrayList<Integer> resultList = new ArrayList<>();
+                    //was passiert, wenn der Test abgeschlossen wird
+                    for(Page page : mCurrentPageSequence)
+                    {
+                        Bundle pageData = page.getData();
+                        String result = pageData.getString("_");
+
+                        //wandel Ergebnis in Zahl um
+                        switch (result)
+                        {
+                            case "Trifft voll und ganz zu":
+                                resultList.add(3);
+                                break;
+                            case "Trifft zu":
+                                resultList.add(2);
+                                break;
+                            case "Trifft nicht zu":
+                                resultList.add(1);
+                                break;
+                            case "Trifft überhaupt nicht zu":
+                                resultList.add(0);
+                                break;
+                            default:
+                                resultList.add(0);
+                                Log.e("Lerntest", "Ergebnis wurde nicht erkannt");
+                        }
+                    }
+                    //Berechne Ergebnis
+                    double earmindedPerc = 0;
+                    for(int i=6; i<12; i++)
+                    {
+                        int result = resultList.get(i);
+                        earmindedPerc += result;
+                    }
+                    earmindedPerc = (earmindedPerc/18)*100;
+
+                    Variables.filterOptions[0] = earmindedPerc >= 50;
+
+                    double eyemindedPerc = 0;
+                    for(int i=0; i<6; i++)
+                    {
+                        int result = resultList.get(i);
+                        eyemindedPerc += result;
+                    }
+                    eyemindedPerc = (eyemindedPerc/18)*100;
+
+                    Variables.filterOptions[1] = eyemindedPerc >= 50;
+
+                    if((eyemindedPerc < 50) && (earmindedPerc < 50))
+                    {
+                        Variables.filterOptions[0] = true;
+                        Variables.filterOptions[1] = true;
+                    }
+
+                    //speichere Lerntyp
+                    Variables.saveDidacticType();
+
+                    activity.finish();
+
+                }
+                else {
                     if (mEditingAfterReview) {
                         mPager.setCurrentItem(mPagerAdapter.getCount() - 1);
-                    } else {
+                    }
+                    else {
                         mPager.setCurrentItem(mPager.getCurrentItem() + 1);
                     }
                 }

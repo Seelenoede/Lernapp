@@ -8,12 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
 
 /**
+ * shows only audio files and the items are bigger than in the home fragment
+ *
  * Created by Student on 14.04.2015.
  */
 public class AutomodusFragment extends Fragment{

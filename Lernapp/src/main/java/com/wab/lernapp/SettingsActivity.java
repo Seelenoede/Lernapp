@@ -1,19 +1,15 @@
 package com.wab.lernapp;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 import java.util.List;
 
 /**
+ *
  * Created by Alexander on 27.04.2015.
  */
 
@@ -24,7 +20,6 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
      * Just returning "true" works, but it's not the idea this method.
      */
     private int COLOR_CHANGED = 101;
-    private int LEARNTYPE_CHANGED = 102;
     @Override
     protected boolean isValidFragment(String SettingsActivity$PrefsFragDidacticType) {
         /**
@@ -73,6 +68,10 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
             //setCurrentColor(sharedPreferences);
             //setResult(COLOR_CHANGED, returnIntent);
         }
+        if(key.equals("preference_didactic_type"))
+        {
+            Variables.loadDidacticType();
+        }
     }
 
     /**
@@ -82,6 +81,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
      */
     //TODO: Back-Button verweist nicht auf "letztes" Fragment
     public static class PrefsFragDidacticType extends PreferenceFragment {
+        boolean ran = false;
         @Override
         public void onCreate(Bundle savedInstanceState) {
 
@@ -89,27 +89,21 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
             //Set default values
             PreferenceManager.setDefaultValues(getActivity(), R.xml.preference_lerntyp, false);
-
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.preference_lerntyp);
-
         }
-    }
 
-    /**
-     * This is a second-level fragment.
-     * It shows up the "didactic type test" - Activity/Fragment
-     */
-    public static class PrefsFragDidacticTypeTest extends PreferenceFragment{
         @Override
-        public void onCreate(Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-
-            //TODO: Lerntyptest als Fragment der Einstellungen oder als eigene Activity?
+        public void onResume()
+        {
+            super.onResume();
+            if(ran)
+            {
+                getActivity().finish();
+            }
+            ran = true;
         }
     }
-
-
 
     /**
      * This Fragment shows the preferences for the second header.

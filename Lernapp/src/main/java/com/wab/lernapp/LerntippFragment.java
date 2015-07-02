@@ -10,16 +10,13 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
+ *
  * Created by Student on 14.04.2015.
  */
 public class LerntippFragment extends Fragment {
 
     public LerntippFragment() {
     }
-
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

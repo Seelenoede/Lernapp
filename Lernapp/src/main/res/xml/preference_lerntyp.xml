@@ -13,7 +13,6 @@
         android:key="preference_didactic_type_test"
         android:title="@string/didactic_type_test"
         android:summary="Starte den Lerntypentest erneut">
-        <!--TODO: Verweist noch auf falsche Activity siehe ToDo "Lerntypentest als Fragment der Einst..." -->
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="com.wab.lernapp"
