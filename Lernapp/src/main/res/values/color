@@ -46,6 +46,11 @@
     <item name="greenAccent" type="color">#F06292</item>
     <item name="greenBar" type="color">#558B2F</item>
 
-
+    <!-- vom test -->
+    <color name="step_pager_previous_tab_color">#ff595959</color>
+    <!--color name="step_pager_selected_tab_color">#FFFF00</color>
+    <color name="step_pager_selected_last_tab_color">#E91E63</color-->
+    <color name="step_pager_next_tab_color">#ffc6c3ca</color>
+    <color name="text_light">#66000000</color>
 
 </resources>

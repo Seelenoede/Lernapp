@@ -4,4 +4,8 @@
     <dimen name="activity_horizontal_margin">10dp</dimen>
     <dimen name="activity_vertical_margin">10dp</dimen>
 
+    <dimen name="step_pager_tab_width">10dp</dimen>
+    <dimen name="step_pager_tab_height">3dp</dimen>
+    <dimen name="step_pager_tab_spacing">2dp</dimen>
+
 </resources>
