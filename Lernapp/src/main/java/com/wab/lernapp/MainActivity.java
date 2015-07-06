@@ -167,24 +167,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
              return true;
          }
 
-         CharSequence text;
-         int duration;
-         Context context;
-         Toast toast;
-
-         switch (id) {
-             case R.id.action_filter:
-                 context = getApplicationContext();
-                 text = "Filtern kommt noch!";
-                 duration = Toast.LENGTH_SHORT;
-                 //currentColor = getResources().getColor(R.color.lightpink);
-                 //setCurrentColor();
-                 toast = Toast.makeText(context, text, duration);
-                 toast.show();
-                 return true;
-             default:
-                 return super.onOptionsItemSelected(item);
-         }
+        return super.onOptionsItemSelected(item);
 	}
 
     @Override

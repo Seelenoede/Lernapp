@@ -11,13 +11,7 @@
         lernapp:showAsAction="ifRoom|collapseActionView"
         android:showAsAction="ifRoom|collapseActionView"
         android:actionViewClass="android.widget.SearchView"/>
-    <item
-        android:id="@+id/action_filter"
-        android:title="@string/action_filter"
-        android:icon="@drawable/ic_filter"
-        android:orderInCategory="100"
-        lernapp:showAsAction="ifRoom"
-        android:showAsAction="ifRoom"/>
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
