@@ -76,7 +76,7 @@ public class SearchActivity extends FragmentActivity {
         }
         else
         {
-            return ThemeUtils.YELLOW;
+            return ThemeUtils.GREEN;
         }
     }
 

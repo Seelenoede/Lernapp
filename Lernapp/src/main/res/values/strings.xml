@@ -33,9 +33,9 @@
 <!--Preferences for appearance-->
     <string name="appearance">Aussehen ändern</string>
     <string-array name="default_colors">
+        <item>Grün</item>
         <item>Gelb</item>
         <item>Orange</item>
-        <item>Grün</item>
     </string-array>
 
     <!--Array für die Lerntipps-->
@@ -65,7 +65,7 @@
 
 
 
-    <string name="default_style_value">Gelb</string>
+    <string name="default_style_value">Grün</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

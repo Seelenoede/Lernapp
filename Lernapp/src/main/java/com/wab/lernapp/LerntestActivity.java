@@ -24,6 +24,9 @@ import com.wab.lernapp.wizard.ui.ReviewFragment;
 import com.wab.lernapp.wizard.ui.StepPagerStrip;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -39,7 +42,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LerntestActivity extends FragmentActivity implements
         PageFragmentCallbacks,
@@ -190,8 +195,75 @@ public class LerntestActivity extends FragmentActivity implements
 
         onPageTreeChanged();
         updateBottomBar();
+        firstTime();
     }
 
+    private void firstTime() {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        HashSet<String> defaultTypes = new HashSet<>();
+        defaultTypes.add("leer");
+        defaultTypes.add("leer");
+        Set<String> didacticTypes = SP.getStringSet("preference_didactic_type", defaultTypes);
+        if (didacticTypes.contains("leer")) {
+            System.out.println("in if");
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LerntestActivity.this);
+
+            // set title
+            alertDialogBuilder.setTitle("Dein Lerntyp");
+
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage("Um die Inhalte auf dich zuzuschneiden möchten wir einen Lerntypentest durchführen.")
+                    .setCancelable(false)
+                    .setPositiveButton("Los geht's",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            System.out.println("in yes");
+                            dialog.cancel();
+                        }
+                    })
+                    .setNegativeButton("Überspringen",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            System.out.println("in if");
+                            LerntestActivity.this.finish();
+                        }
+                    });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // show it
+            alertDialog.show();
+        }
+        else
+        {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    LerntestActivity.this);
+
+            // set title
+            alertDialogBuilder.setTitle("Dein Lerntyp");
+
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage("Möchtest du den Test nochmal machen und den aktuellen Lerntyp überschreiben?")
+                    .setCancelable(false)
+                    .setPositiveButton("Klar",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            dialog.cancel();
+                        }
+                    })
+                    .setNegativeButton("Lieber nicht",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            LerntestActivity.this.finish();
+                        }
+                    });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // show it
+            alertDialog.show();
+        }
+    }
     private int getThemeNumber() {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String strFarbe = SP.getString("preference_appearance","@string/default_style_value");
@@ -209,7 +281,7 @@ public class LerntestActivity extends FragmentActivity implements
         }
         else
         {
-            return ThemeUtils.YELLOW;
+            return ThemeUtils.GREEN;
         }
     }
 

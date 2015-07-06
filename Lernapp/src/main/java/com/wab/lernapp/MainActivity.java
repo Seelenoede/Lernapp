@@ -22,6 +22,9 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MainActivity extends FragmentActivity implements View.OnClickListener{
 
     static Activity activity;
@@ -95,8 +98,24 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().add(R.id.content_frame, fragment).commit();
         setTitle("Home");
+
+        //Aufruf Lerntest
+        startLerntest();
 	}
 
+    private void startLerntest(){
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        HashSet<String> defaultTypes = new HashSet<>();
+        defaultTypes.add("leer");
+        defaultTypes.add("leer");
+        Set<String> didacticTypes = SP.getStringSet("preference_didactic_type", defaultTypes);
+        if (didacticTypes.contains("leer"))
+        {
+            Intent intent = new Intent(MainActivity.this, LerntestActivity.class);
+            startActivity(intent);
+
+        }
+    }
     private int getThemeNumber() {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String strFarbe = SP.getString("preference_appearance","@string/default_style_value");
@@ -114,7 +133,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
         else
         {
-            return ThemeUtils.YELLOW;
+            return ThemeUtils.GREEN;
         }
     }
 

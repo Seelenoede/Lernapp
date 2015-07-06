@@ -171,7 +171,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         }
         else
         {
-            return ThemeUtils.YELLOW;
+            return ThemeUtils.GREEN;
         }
     }
 }

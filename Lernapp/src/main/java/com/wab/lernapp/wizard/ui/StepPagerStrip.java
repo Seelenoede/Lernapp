@@ -23,6 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -71,10 +72,11 @@ public class StepPagerStrip extends View {
         a.recycle();
 
         final Resources res = getResources();
-        Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        float width = display.getWidth();
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
 
-        mTabWidth = (width-235)/19; //für die Lücken und /19 weil ich 19 Tabs brauche
+        float xSize = metrics.widthPixels;
+
+        mTabWidth = (xSize-230)/13; //für die Lücken und /13 weil ich 13 Tabs brauche
         mTabHeight = res.getDimensionPixelSize(R.dimen.step_pager_tab_height);
         mTabSpacing = res.getDimensionPixelSize(R.dimen.step_pager_tab_spacing);
 
