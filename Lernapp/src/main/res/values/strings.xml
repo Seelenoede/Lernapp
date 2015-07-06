@@ -22,7 +22,7 @@
 <!--#########################-->
 <!-- Begin Preferences Values-->
 <!--#########################-->
-    <string name="title_activity_settings">settings</string>
+    <string name="title_activity_settings">Settings</string>
 <!--Preferences for didactic type-->
     <string name="didactic_type">Lerntyp auswählen</string>
     <string-array name="default_didactic_types">
