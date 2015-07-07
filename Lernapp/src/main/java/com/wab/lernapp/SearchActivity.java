@@ -30,8 +30,7 @@ public class SearchActivity extends FragmentActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             getActionBar().setTitle("Suche '" + query + "'");
-            //searchFile(query.toLowerCase(), (ListView) findViewById(R.id.search_result));
-            fragment = SearchFragment.newInstance(query);
+            fragment = SearchFragment.newInstance(query.toLowerCase());
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().add(R.id.content_frame, fragment).addToBackStack(null).commit();
         }
