@@ -29,10 +29,16 @@ public class AutomodusFragment extends Fragment{
     }
 
     @Override
+    public void onCreate(Bundle saveInstanceState)
+    {
+        super.onCreate(saveInstanceState);
+        startTime = System.nanoTime();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Log.d(TAG, "Start Automodus");
-        startTime = System.nanoTime();
         View rootView = inflater.inflate(R.layout.fragment_automodus, container, false);
         ListView mItemList = (ListView) rootView.findViewById(R.id.carList);
 
@@ -81,9 +87,9 @@ public class AutomodusFragment extends Fragment{
     }
 
     @Override
-    public void onDestroyView()
+    public void onDestroy()
     {
-        super.onDestroyView();
+        super.onDestroy();
         endTime = System.nanoTime();
         long delta = endTime - startTime;
 
