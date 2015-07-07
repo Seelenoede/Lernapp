@@ -27,8 +27,16 @@ public class AuswertungenFragment extends Fragment {
     private static final String TAG = "AuswertungFragment";
 
     @Override
+    public void onCreate(Bundle ba)
+    {
+        super.onCreate(ba);
+        Log.d(TAG, "create");
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         String text;
+        Log.d(TAG, "auswertung load");
         View rootView = inflater.inflate(R.layout.fragment_auswertungen, container, false);
 
         TextView textAuto = (TextView) rootView.findViewById(R.id.textAutozeit);
@@ -106,6 +114,9 @@ public class AuswertungenFragment extends Fragment {
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(firstTime - 1);
         graph.getViewport().setMaxX(lastTime + 1);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(100);
 
         //some more styling
         series.setSpacing(20);

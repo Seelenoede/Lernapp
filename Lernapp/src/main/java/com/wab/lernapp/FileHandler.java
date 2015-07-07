@@ -228,6 +228,27 @@ public class FileHandler
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
     }
 
+    /**
+     *
+     * @param src Input file
+     * @param baseActivity parent activity
+     * @param fromAutomodus starts from car mode
+     */
+    public void openAudio(File src, Activity baseActivity, boolean fromAutomodus)
+    {
+        Log.d(TAG, "Open Audio");
+
+        Fragment fragment = AudioFragment.newInstance(src, fromAutomodus);
+
+        FragmentManager fragmentManager = baseActivity.getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+    }
+
+    /**
+     *
+     * @param chosenFile input file
+     * @param activity parent activity
+     */
     public void openText(File chosenFile, Activity activity)
     {
         Variables.chosenFile = chosenFile;
@@ -237,6 +258,11 @@ public class FileHandler
         activity.setTitle(chosenFile.getName());
     }
 
+    /**
+     *
+     * @param srcDir source directory
+     * @param activity parent activity
+     */
     public void openDirectory(int srcDir, Activity activity)
     {
         Fragment fragment = FileViewerFragment.newInstance(srcDir);

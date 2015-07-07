@@ -29,6 +29,11 @@ public class AudioFragment extends Fragment implements MediaPlayer.OnCompletionL
     private TextView songTotalDurationLabel;
     private TextView songCurrentDurationLabel;
 
+    /**
+     *
+     * @param srcPath input file path
+     * @return initialized AudioFragment
+     */
     public static AudioFragment newInstance(File srcPath) {
         AudioFragment fragment = new AudioFragment();
         Bundle args = new Bundle();
@@ -37,6 +42,23 @@ public class AudioFragment extends Fragment implements MediaPlayer.OnCompletionL
         return fragment;
     }
 
+    public static AudioFragment newInstance(File srcPath, boolean fromAutomodus)
+    {
+        AudioFragment fragment = new AudioFragment();
+        Bundle args = new Bundle();
+        args.putString("srcPath", srcPath.getAbsolutePath());
+        if(fromAutomodus)
+        {
+            args.putLong("startTime", System.nanoTime());
+            args.putBoolean("fromAutomodus", true);
+        }
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    /**
+     * mandatory empty constructor
+     */
     public AudioFragment() {
         // Required empty public constructor
     }
@@ -198,7 +220,7 @@ public class AudioFragment extends Fragment implements MediaPlayer.OnCompletionL
     }
 
     @Override
-    public void onDestroy()
+    public void onDestroyView()
     {
         mHandler.removeCallbacks(mUpdateTimeTask);
         //release and destroy the media player
@@ -206,6 +228,16 @@ public class AudioFragment extends Fragment implements MediaPlayer.OnCompletionL
         mediaPlayer = null;
 
         Variables.saveLearnTimeBoth();
-        super.onDestroy();
+
+        if(getArguments().getBoolean("fromAutomodus", false))
+        {
+            long endTime = System.nanoTime();
+            long delta = endTime - getArguments().getLong("startTime");
+
+            Variables.carTime += (delta/1e9);
+            Variables.saveCarTime();
+        }
+
+        super.onDestroyView();
     }
 }

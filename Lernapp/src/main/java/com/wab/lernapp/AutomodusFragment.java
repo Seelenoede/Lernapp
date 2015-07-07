@@ -29,16 +29,10 @@ public class AutomodusFragment extends Fragment{
     }
 
     @Override
-    public void onCreate(Bundle saveInstanceState)
-    {
-        super.onCreate(saveInstanceState);
-        startTime = System.nanoTime();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Log.d(TAG, "Start Automodus");
+        startTime = System.nanoTime();
         View rootView = inflater.inflate(R.layout.fragment_automodus, container, false);
         ListView mItemList = (ListView) rootView.findViewById(R.id.carList);
 
@@ -82,14 +76,14 @@ public class AutomodusFragment extends Fragment{
             Variables.setStartTimes();
 
             //Open Audio File
-            fileHandler.openAudio(chosenFile, getActivity());
+            fileHandler.openAudio(chosenFile, getActivity(), true);
         }
     }
 
     @Override
-    public void onDestroy()
+    public void onDestroyView()
     {
-        super.onDestroy();
+        super.onDestroyView();
         endTime = System.nanoTime();
         long delta = endTime - startTime;
 
