@@ -205,7 +205,6 @@ public class LerntestActivity extends FragmentActivity implements
         defaultTypes.add("leer");
         Set<String> didacticTypes = SP.getStringSet("preference_didactic_type", defaultTypes);
         if (didacticTypes.contains("leer")) {
-            System.out.println("in if");
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LerntestActivity.this);
 
             // set title
@@ -217,14 +216,19 @@ public class LerntestActivity extends FragmentActivity implements
                     .setCancelable(false)
                     .setPositiveButton("Los geht's",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int id) {
-                            System.out.println("in yes");
                             dialog.cancel();
                         }
                     })
                     .setNegativeButton("Überspringen",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int id) {
-                            System.out.println("in if");
                             LerntestActivity.this.finish();
+                            HashSet<String> didacticTypes = new HashSet<>();
+                                didacticTypes.add("visuell");
+                                didacticTypes.add("auditiv");
+
+                            SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                            SharedPreferences.Editor mEditor = SP.edit();
+                            mEditor.putStringSet("preference_didactic_type", didacticTypes).commit();
                         }
                     });
 
