@@ -76,8 +76,8 @@
 
     <!-- vom test -->
 
-    <string name="next">Next</string>
-    <string name="prev">Previous</string>
+    <string name="next">Weiter</string>
+    <string name="prev">Zurück</string>
     <string name="finish">Test abgeben</string>
     <string name="review">Review</string>
 
