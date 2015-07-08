@@ -35,21 +35,17 @@ public class AuswertungenFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        String text;
         Log.d(TAG, "auswertung load");
         View rootView = inflater.inflate(R.layout.fragment_auswertungen, container, false);
 
         TextView textAuto = (TextView) rootView.findViewById(R.id.textAutozeit);
-        text = Long.toString(Variables.carTime);
-        textAuto.setText(text + " Sekunden");
+        textAuto.setText(Long.toString(Variables.carTime/3600) + ":" + Long.toString((Variables.carTime%3600)/60) + ":" + Long.toString(Variables.carTime%60));
 
         TextView textLern = (TextView) rootView.findViewById(R.id.textLernzeit);
-        text = Long.toString(Variables.learnTime);
-        textLern.setText(text + " Sekunden");
+        textLern.setText(Long.toString(Variables.learnTime/3600) + ":" + Long.toString((Variables.learnTime%3600)/60) + ":" + Long.toString(Variables.learnTime%60));
 
         TextView textDurchschnitt = (TextView) rootView.findViewById(R.id.textDurchschnitt);
-        text = Double.toString(Variables.averageGrade);
-        textDurchschnitt.setText(text);
+        textDurchschnitt.setText(Double.toString(Variables.averageGrade));
 
         rootView.findViewById(R.id.graphZeit).setVisibility(View.INVISIBLE);
 
@@ -62,7 +58,6 @@ public class AuswertungenFragment extends Fragment {
                 break;
             }
         }
-
 
         if(Variables.gradeCount>0)
         {
